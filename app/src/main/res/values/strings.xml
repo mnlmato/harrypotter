@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">HarryPotter</string>
     <string name="characters_unknown_house">Unknown house</string>
+    <string name="characters_unknown_actor_name">Unknown actor name</string>
+    <string name="characters_unknown_gender">Unknown gender</string>
+    <string name="characters_unknown_species">Unknown species</string>
+    <string name="characters_unknown_birth">Unknown birth</string>
     <string name="generic_error_title">An error has occurred. Please, try again.</string>
     <string name="generic_error_retry_button">Retry</string>
 </resources>

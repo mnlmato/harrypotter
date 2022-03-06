@@ -33,7 +33,16 @@ class CharactersViewModel @Inject constructor(
     val showGenericErrorEvent: LiveData<Boolean>
         get() = showGenericErrorMutableEvent
 
+    private var showDetailMutableEvent = MutableLiveData<CharacterUI>()
+    val showDetailEvent: LiveData<CharacterUI>
+        get() = showDetailMutableEvent
+
     init {
+        loadCharacters()
+    }
+
+    fun onRetryButtonClicked() {
+        showGenericErrorMutableEvent.value = false
         loadCharacters()
     }
 
@@ -55,8 +64,7 @@ class CharactersViewModel @Inject constructor(
         }
     }
 
-    fun onRetryButtonClicked() {
-        showGenericErrorMutableEvent.value = false
-        loadCharacters()
+    fun onItemClick(character: CharacterUI) {
+        showDetailMutableEvent.value = character
     }
 }

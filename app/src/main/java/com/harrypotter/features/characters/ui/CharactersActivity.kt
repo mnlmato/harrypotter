@@ -3,10 +3,10 @@ package com.harrypotter.features.characters.ui
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.harrypotter.R
@@ -27,20 +27,26 @@ class CharactersActivity : AppCompatActivity() {
 
     private val charactersAdapter: CharactersAdapter by lazy {
         CharactersAdapter(imageLoader) {
-            Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show()
+            viewModel.onItemClick(it)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_characters)
+
         initViews()
         setListeners()
         subscribeToEvents()
     }
 
     private fun initViews() {
-        findViewById<RecyclerView>(R.id.charactersRecyclerView).adapter = charactersAdapter
+        findViewById<RecyclerView>(R.id.charactersRecyclerView).apply {
+            adapter = charactersAdapter
+            addItemDecoration(
+                DividerItemDecoration(this@CharactersActivity, DividerItemDecoration.VERTICAL)
+            )
+        }
     }
 
     private fun setListeners() {
@@ -54,6 +60,7 @@ class CharactersActivity : AppCompatActivity() {
             showLoadingEvent.observe(this@CharactersActivity, ::showLoading)
             showGenericErrorEvent.observe(this@CharactersActivity, ::showGenericError)
             charactersEvent.observe(this@CharactersActivity, ::showCharacters)
+            showDetailEvent.observe(this@CharactersActivity, ::showDetail)
         }
     }
 
@@ -67,5 +74,9 @@ class CharactersActivity : AppCompatActivity() {
 
     private fun showCharacters(characters: List<CharacterUI>) {
         charactersAdapter.update(characters)
+    }
+
+    private fun showDetail(character: CharacterUI) {
+        CharacterDetailActivity.navigate(this, character)
     }
 }

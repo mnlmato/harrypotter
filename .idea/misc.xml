@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.27870370370370373" />
+        <entry key="app/src/main/res/drawable/ic_baseline_image_not_supported_24.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/activity_character_detail.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_characters.xml" value="0.2151268115942029" />
         <entry key="app/src/main/res/layout/content_generic_error.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/item_characters.xml" value="0.33" />
