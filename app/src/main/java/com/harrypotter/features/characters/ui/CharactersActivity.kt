@@ -1,11 +1,14 @@
 package com.harrypotter.features.characters.ui
 
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.harrypotter.R
 import com.harrypotter.coreui.imageloader.ImageLoader
 import com.harrypotter.features.characters.ui.adapter.CharactersAdapter
@@ -24,7 +27,7 @@ class CharactersActivity : AppCompatActivity() {
 
     private val charactersAdapter: CharactersAdapter by lazy {
         CharactersAdapter(imageLoader) {
-            // TODO Handle item click
+            Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -32,6 +35,7 @@ class CharactersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_characters)
         initViews()
+        setListeners()
         subscribeToEvents()
     }
 
@@ -39,15 +43,26 @@ class CharactersActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.charactersRecyclerView).adapter = charactersAdapter
     }
 
+    private fun setListeners() {
+        findViewById<MaterialButton>(R.id.genericErrorButton).setOnClickListener {
+            viewModel.onRetryButtonClicked()
+        }
+    }
+
     private fun subscribeToEvents() {
         with(viewModel) {
-            isLoadingEvent.observe(this@CharactersActivity, ::showLoading)
+            showLoadingEvent.observe(this@CharactersActivity, ::showLoading)
+            showGenericErrorEvent.observe(this@CharactersActivity, ::showGenericError)
             charactersEvent.observe(this@CharactersActivity, ::showCharacters)
         }
     }
 
     private fun showLoading(isLoading: Boolean) {
         findViewById<ProgressBar>(R.id.loadingView).isVisible = isLoading
+    }
+
+    private fun showGenericError(isErrorVisible: Boolean) {
+        findViewById<ViewGroup>(R.id.genericErrorMainViewGroup).isVisible = isErrorVisible
     }
 
     private fun showCharacters(characters: List<CharacterUI>) {

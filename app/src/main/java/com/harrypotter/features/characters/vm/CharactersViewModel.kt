@@ -21,13 +21,17 @@ class CharactersViewModel @Inject constructor(
     private val coroutinesDispatchers: CoroutinesDispatchers
 ) : ViewModel() {
 
-    private var isLoadingMutableEvent = MutableLiveData<Boolean>()
-    val isLoadingEvent: LiveData<Boolean>
-        get() = isLoadingMutableEvent
+    private var showLoadingMutableEvent = MutableLiveData<Boolean>()
+    val showLoadingEvent: LiveData<Boolean>
+        get() = showLoadingMutableEvent
 
     private var charactersMutableEvent = MutableLiveData<List<CharacterUI>>()
     val charactersEvent: LiveData<List<CharacterUI>>
         get() = charactersMutableEvent
+
+    private var showGenericErrorMutableEvent = MutableLiveData<Boolean>()
+    val showGenericErrorEvent: LiveData<Boolean>
+        get() = showGenericErrorMutableEvent
 
     init {
         loadCharacters()
@@ -35,7 +39,7 @@ class CharactersViewModel @Inject constructor(
 
     private fun loadCharacters() {
         viewModelScope.launch {
-            isLoadingMutableEvent.value = true
+            showLoadingMutableEvent.value = true
             withContext(coroutinesDispatchers.io) {
                 getCharactersUseCase().fold(
                     onSuccess = {
@@ -43,11 +47,16 @@ class CharactersViewModel @Inject constructor(
                         charactersMutableEvent.postValue(charactersUI)
                     },
                     onError = {
-                        // TODO Handle error, create a message creator, interface here and implementation in the ui
+                        showGenericErrorMutableEvent.postValue(true)
                     }
                 )
             }
-            isLoadingMutableEvent.value = false
+            showLoadingMutableEvent.value = false
         }
+    }
+
+    fun onRetryButtonClicked() {
+        showGenericErrorMutableEvent.value = false
+        loadCharacters()
     }
 }

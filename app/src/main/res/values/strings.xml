@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">HarryPotter</string>
     <string name="characters_unknown_house">Unknown house</string>
+    <string name="generic_error_title">An error has occurred. Please, try again.</string>
+    <string name="generic_error_retry_button">Retry</string>
 </resources>
