@@ -1,39 +1,30 @@
 package com.harrypotter.features.characters.pages
 
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.harrypotter.R
-import com.harrypotter.features.characters.ui.adapter.CharactersViewHolder
-import org.hamcrest.core.IsNot.not
+import com.harrypotter.features.ViewInteractionTest
+import com.harrypotter.features.extensions.isDisplayed
+import com.harrypotter.features.extensions.isNotDisplayed
+import com.harrypotter.features.extensions.performItemClickAtPosition
 
 class CharactersPage {
 
-    private val charactersRecyclerView = onView(withId(R.id.charactersRecyclerView))
-    private val loadingView = onView(withId(R.id.loadingView))
+    private val charactersRecyclerView = ViewInteractionTest(R.id.charactersRecyclerView)
+    private val loadingView = ViewInteractionTest(R.id.loadingView)
 
     fun isPageDisplayed() {
-        charactersRecyclerView.check(matches(isDisplayed()))
+        charactersRecyclerView.isDisplayed()
     }
 
     fun loadingIsVisible() {
-        loadingView.check(matches(isDisplayed()))
+        loadingView.isDisplayed()
     }
 
     fun loadingIsInvisible() {
-        loadingView.check(matches(not(isDisplayed())))
+        loadingView.isNotDisplayed()
     }
 
     fun clickItem(position: Int) {
-        charactersRecyclerView.perform(
-            RecyclerViewActions.actionOnItemAtPosition<CharactersViewHolder>(
-                position,
-                click()
-            )
-        )
+        charactersRecyclerView.performItemClickAtPosition(position)
     }
 
     fun checkExpectedDataIsShowed(position: Int) {
