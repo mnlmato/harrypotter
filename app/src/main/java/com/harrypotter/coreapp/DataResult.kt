@@ -1,4 +1,4 @@
-package com.harrypotter.features.characters.core
+package com.harrypotter.coreapp
 
 import java.lang.Exception
 

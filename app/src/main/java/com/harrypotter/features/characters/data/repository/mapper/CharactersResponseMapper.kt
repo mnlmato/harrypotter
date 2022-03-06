@@ -5,11 +5,11 @@ import com.harrypotter.features.characters.domain.model.Character
 import com.harrypotter.features.characters.domain.model.Characters
 
 fun List<CharacterResponse>.toCharacters() = Characters(
-    characters = this.map {
+    data = this.map {
         Character(
             name = it.name,
             house = it.house,
-            image = it.image
+            imageUrl = it.imageUrl
         )
     }
 )

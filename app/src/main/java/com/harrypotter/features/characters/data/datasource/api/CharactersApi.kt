@@ -4,6 +4,7 @@ import com.harrypotter.features.characters.data.datasource.api.model.CharacterRe
 import retrofit2.http.GET
 
 interface CharactersApi {
+
     @GET("characters")
     suspend fun getCharacters(): List<CharacterResponse>
 }

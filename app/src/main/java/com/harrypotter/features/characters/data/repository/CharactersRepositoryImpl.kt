@@ -1,6 +1,6 @@
 package com.harrypotter.features.characters.data.repository
 
-import com.harrypotter.features.characters.core.DataResult
+import com.harrypotter.coreapp.DataResult
 import com.harrypotter.features.characters.data.datasource.api.CharactersApiDatasource
 import com.harrypotter.features.characters.data.repository.mapper.toCharacters
 import com.harrypotter.features.characters.domain.CharactersRepository

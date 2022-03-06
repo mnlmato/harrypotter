@@ -1,6 +1,5 @@
-package com.harrypotter.features.characters.data.di
+package com.harrypotter.coredata
 
-import com.harrypotter.features.characters.data.datasource.api.CharactersApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,6 +27,7 @@ class RetrofitModule {
     }
 
     @Provides
+    @Singleton
     fun provideLogsOKHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
@@ -35,10 +35,5 @@ class RetrofitModule {
         return OkHttpClient.Builder()
             .addInterceptor(interceptor)
             .build()
-    }
-
-    @Provides
-    fun provideCharactersApi(retrofit: Retrofit): CharactersApi {
-        return retrofit.create(CharactersApi::class.java)
     }
 }

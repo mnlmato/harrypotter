@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HarryPotter</string>
+    <string name="characters_unknown_house">Unknown house</string>
 </resources>

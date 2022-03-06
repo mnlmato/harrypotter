@@ -1,6 +1,6 @@
 package com.harrypotter.features.characters.domain
 
-import com.harrypotter.features.characters.core.DataResult
+import com.harrypotter.coreapp.DataResult
 import com.harrypotter.features.characters.domain.model.Characters
 
 interface CharactersRepository {
