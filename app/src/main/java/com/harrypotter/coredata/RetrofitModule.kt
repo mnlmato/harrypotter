@@ -10,17 +10,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-private const val BASE_URL = "https://hp-api.herokuapp.com/api/"
-
 @Module
 @InstallIn(SingletonComponent::class)
 class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(logsClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(logsClient: OkHttpClient, urlProvider: UrlProvider): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(urlProvider.baseUrl)
             .client(logsClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
