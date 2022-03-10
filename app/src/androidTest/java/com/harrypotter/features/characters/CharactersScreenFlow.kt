@@ -1,6 +1,5 @@
 package com.harrypotter.features.characters
 
-import androidx.test.espresso.IdlingRegistry
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
@@ -12,7 +11,6 @@ import com.harrypotter.features.characters.ui.CharactersActivity
 import com.harrypotter.testdependencies.PORT_LOCALHOST
 import com.harrypotter.testdependencies.mockwebserver.getCharactersSuccessResponse
 import com.harrypotter.testdependencies.mockwebserver.getError
-import com.jakewharton.espresso.OkHttp3IdlingResource
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -65,7 +63,6 @@ class CharactersScreenFlow {
             }
             start(PORT_LOCALHOST)
         }
-        IdlingRegistry.getInstance().register(OkHttp3IdlingResource.create("okhttp", okHttp))
     }
 
     @After
@@ -77,7 +74,6 @@ class CharactersScreenFlow {
     @Test
     fun givenSuccessResponseWhenClickItemThenShowDetailScreen() {
         charactersPage.isPageDisplayed()
-        // charactersPage.loadingIsVisible() TODO Research how to test this first state
         charactersPage.loadingIsInvisible()
         charactersPage.clickItem(0)
         characterDetailPage.isPageDisplayed()
