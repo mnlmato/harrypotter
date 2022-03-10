@@ -8,6 +8,7 @@ import com.harrypotter.features.characters.data.datasource.api.CHARACTERS_ENDPOI
 import com.harrypotter.features.characters.pages.CharacterDetailPage
 import com.harrypotter.features.characters.pages.CharactersPage
 import com.harrypotter.features.characters.ui.CharactersActivity
+import com.harrypotter.features.characters.vm.model.CharacterUI
 import com.harrypotter.rules.MockWebServerRule
 import com.harrypotter.testdependencies.mockwebserver.getCharactersSuccessResponse
 import com.harrypotter.testdependencies.mockwebserver.getError
@@ -61,6 +62,17 @@ class CharactersScreenFlow {
         charactersPage.loadingIsInvisible()
         charactersPage.clickItem(0)
         characterDetailPage.isPageDisplayed()
+        characterDetailPage.checkExpectedDataIsShowed(
+            CharacterUI(
+                name = "Harry Potter",
+                house = "Gryffindor",
+                imageUrl = "http://hp-api.herokuapp.com/images/harry.jpg",
+                actorName = "Daniel Radcliffe",
+                gender = "male",
+                species = "human",
+                birth = "31-07-1980"
+            )
+        )
     }
 
     private fun loadSuccessResponse() {

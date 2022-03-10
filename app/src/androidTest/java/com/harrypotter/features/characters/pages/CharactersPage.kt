@@ -15,20 +15,11 @@ class CharactersPage {
         charactersRecyclerView.isDisplayed()
     }
 
-    fun loadingIsVisible() {
-        loadingView.isDisplayed()
-    }
-
     fun loadingIsInvisible() {
         loadingView.isNotDisplayed()
     }
 
     fun clickItem(position: Int) {
         charactersRecyclerView.performItemClickAtPosition(position)
-    }
-
-    fun checkExpectedDataIsShowed(position: Int) {
-        // TODO Under dev
-        // https://stackoverflow.com/questions/31394569/how-to-assert-inside-a-recyclerview-in-espresso
     }
 }
