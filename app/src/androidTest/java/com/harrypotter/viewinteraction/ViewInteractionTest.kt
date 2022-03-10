@@ -1,4 +1,4 @@
-package com.harrypotter.features
+package com.harrypotter.viewinteraction
 
 import androidx.annotation.IdRes
 import androidx.test.espresso.Espresso.onView

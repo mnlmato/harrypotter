@@ -4,17 +4,23 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.harrypotter.coredata.UrlProviderModule
+import com.harrypotter.coredata.di.UrlProviderModule
+import com.harrypotter.features.characters.data.datasource.api.CHARACTERS_ENDPOINT
 import com.harrypotter.features.characters.pages.CharacterDetailPage
 import com.harrypotter.features.characters.pages.CharactersPage
 import com.harrypotter.features.characters.ui.CharactersActivity
-import com.harrypotter.testdependencies.MockWebServerDispatcher
+import com.harrypotter.testdependencies.PORT_LOCALHOST
+import com.harrypotter.testdependencies.mockwebserver.getCharactersSuccessResponse
+import com.harrypotter.testdependencies.mockwebserver.getError
 import com.jakewharton.espresso.OkHttp3IdlingResource
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import okhttp3.OkHttpClient
+import okhttp3.mockwebserver.Dispatcher
+import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import okhttp3.mockwebserver.RecordedRequest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -37,7 +43,7 @@ class CharactersScreenFlow {
     @get:Rule
     val rule = activityScenarioRule<CharactersActivity>()
 
-    lateinit var mockWebServer: MockWebServer
+    private val mockWebServer = MockWebServer()
 
     private val charactersPage = CharactersPage()
     private val characterDetailPage = CharacterDetailPage()
@@ -48,9 +54,16 @@ class CharactersScreenFlow {
     @Before
     fun setUp() {
         hiltRule.inject()
-        mockWebServer = MockWebServer().apply {
-            dispatcher = MockWebServerDispatcher().RequestDispatcher()
-            start(8080)
+        mockWebServer.apply {
+            dispatcher = object : Dispatcher() {
+                override fun dispatch(request: RecordedRequest): MockResponse {
+                    return when (request.path) {
+                        "/$CHARACTERS_ENDPOINT" -> getCharactersSuccessResponse()
+                        else -> getError()
+                    }
+                }
+            }
+            start(PORT_LOCALHOST)
         }
         IdlingRegistry.getInstance().register(OkHttp3IdlingResource.create("okhttp", okHttp))
     }
@@ -69,8 +82,4 @@ class CharactersScreenFlow {
         charactersPage.clickItem(0)
         characterDetailPage.isPageDisplayed()
     }
-
-    // TODO Check an item contains the expected data in the holder
-    // TODO Check the data in the detail is the expected
-    // TODO Fetch the data from json, creates a random position and check the item of this position
 }

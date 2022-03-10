@@ -1,4 +1,4 @@
-package com.harrypotter.features.extensions
+package com.harrypotter.viewinteraction.extensions
 
 import android.view.View
 import androidx.test.espresso.PerformException
@@ -7,10 +7,10 @@ import androidx.test.espresso.ViewAction
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.util.HumanReadables
-import com.harrypotter.features.ViewInteractionTest
+import com.harrypotter.viewinteraction.ViewInteractionTest
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.any
-import org.hamcrest.core.IsNot.not
+import org.hamcrest.Matchers.not
 import java.util.concurrent.TimeoutException
 
 fun ViewInteractionTest.isDisplayed() {

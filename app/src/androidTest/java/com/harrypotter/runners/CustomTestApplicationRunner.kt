@@ -1,4 +1,4 @@
-package com.harrypotter.rules
+package com.harrypotter.runners
 
 import android.app.Application
 import android.content.Context

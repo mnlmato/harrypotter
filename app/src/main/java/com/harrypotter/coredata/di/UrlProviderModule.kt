@@ -1,5 +1,7 @@
-package com.harrypotter.coredata
+package com.harrypotter.coredata.di
 
+import com.harrypotter.coredata.UrlProvider
+import com.harrypotter.coredata.UrlProviderImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,7 +12,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class UrlProviderModule {
 
-    // TODO Move this modules to another package and try to use the @Binds annotation
     @Provides
     @Singleton
     fun provideUrlProvider(): UrlProvider {

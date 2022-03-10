@@ -1,5 +1,6 @@
-package com.harrypotter.coredata
+package com.harrypotter.coredata.di
 
+import com.harrypotter.coredata.UrlProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

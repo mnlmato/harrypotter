@@ -1,9 +1,9 @@
 package com.harrypotter.features.characters.pages
 
 import com.harrypotter.R
-import com.harrypotter.features.ViewInteractionTest
 import com.harrypotter.features.characters.vm.model.CharacterUI
-import com.harrypotter.features.extensions.isDisplayed
+import com.harrypotter.viewinteraction.ViewInteractionTest
+import com.harrypotter.viewinteraction.extensions.isDisplayed
 
 class CharacterDetailPage {
 
