@@ -11,15 +11,13 @@ class MockWebServerRule : TestRule {
     lateinit var mockWebServer: MockWebServer
         private set
 
-    override fun apply(base: Statement, description: Description?): Statement {
-        return object : Statement() {
-            override fun evaluate() {
-                startServer()
-                try {
-                    base.evaluate()
-                } finally {
-                    stopServer()
-                }
+    override fun apply(base: Statement, description: Description?) = object : Statement() {
+        override fun evaluate() {
+            startServer()
+            try {
+                base.evaluate()
+            } finally {
+                stopServer()
             }
         }
     }
