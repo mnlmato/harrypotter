@@ -1,6 +1,7 @@
 package com.harrypotter.features.characters.pages
 
 import com.harrypotter.R
+import com.harrypotter.features.characters.ui.adapter.CharactersViewHolder
 import com.harrypotter.viewinteraction.ViewInteractionTest
 import com.harrypotter.viewinteraction.extensions.isDisplayed
 import com.harrypotter.viewinteraction.extensions.isNotDisplayed
@@ -20,6 +21,6 @@ class CharactersPage {
     }
 
     fun clickItem(position: Int) {
-        charactersRecyclerView.performItemClickAtPosition(position)
+        charactersRecyclerView.performItemClickAtPosition<CharactersViewHolder>(position)
     }
 }

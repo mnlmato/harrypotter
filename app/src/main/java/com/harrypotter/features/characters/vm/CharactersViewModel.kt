@@ -37,18 +37,14 @@ class CharactersViewModel @Inject constructor(
     val showDetailEvent: LiveData<CharacterUI>
         get() = showDetailMutableEvent
 
-    init {
-        loadCharacters()
-    }
-
     fun onRetryButtonClicked() {
         showGenericErrorMutableEvent.value = false
         loadCharacters()
     }
 
-    private fun loadCharacters() {
-        viewModelScope.launch {
-            showLoadingMutableEvent.value = true
+    fun loadCharacters() {
+        showLoadingMutableEvent.value = true
+        viewModelScope.launch(coroutinesDispatchers.immediate) {
             withContext(coroutinesDispatchers.io) {
                 getCharactersUseCase().fold(
                     onSuccess = {

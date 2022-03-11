@@ -1,13 +1,13 @@
 package com.harrypotter.viewinteraction.extensions
 
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.contrib.RecyclerViewActions
-import com.harrypotter.features.characters.ui.adapter.CharactersViewHolder
 import com.harrypotter.viewinteraction.ViewInteractionTest
 
-fun ViewInteractionTest.performItemClickAtPosition(position: Int) {
+fun <T: RecyclerView.ViewHolder>ViewInteractionTest.performItemClickAtPosition(position: Int) {
     viewInteraction.perform(
-        RecyclerViewActions.actionOnItemAtPosition<CharactersViewHolder>(
+        RecyclerViewActions.actionOnItemAtPosition<T>(
             position,
             ViewActions.click()
         )

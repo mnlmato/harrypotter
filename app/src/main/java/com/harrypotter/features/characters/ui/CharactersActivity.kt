@@ -35,6 +35,7 @@ class CharactersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_characters)
 
+        viewModel.loadCharacters()
         initViews()
         setListeners()
         subscribeToEvents()
