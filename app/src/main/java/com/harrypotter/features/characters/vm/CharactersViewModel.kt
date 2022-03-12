@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.harrypotter.coreui.dispatchers.CoroutinesDispatchers
-import com.harrypotter.coreui.stringconverter.StringConverter
 import com.harrypotter.features.characters.domain.usecase.GetCharactersUseCase
 import com.harrypotter.features.characters.vm.mapper.toCharactersUI
 import com.harrypotter.features.characters.vm.model.CharacterUI
@@ -17,7 +16,6 @@ import javax.inject.Inject
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
     private val getCharactersUseCase: GetCharactersUseCase,
-    private val stringConverter: StringConverter,
     private val coroutinesDispatchers: CoroutinesDispatchers
 ) : ViewModel() {
 
@@ -48,7 +46,7 @@ class CharactersViewModel @Inject constructor(
             withContext(coroutinesDispatchers.io) {
                 getCharactersUseCase().fold(
                     onSuccess = {
-                        val charactersUI = it.toCharactersUI(stringConverter)
+                        val charactersUI = it.toCharactersUI()
                         charactersMutableEvent.postValue(charactersUI)
                     },
                     onError = {

@@ -1,7 +1,6 @@
 package com.harrypotter.features.characters.domain.usecase
 
-import com.harrypotter.features.characters.domain.model.Character
-import com.harrypotter.features.characters.domain.model.Characters
+import com.harrypotter.features.characters.domain.model.*
 
 interface CharactersFakeDomainGenerator {
 
@@ -9,56 +8,56 @@ interface CharactersFakeDomainGenerator {
         listOf(
             Character(
                 name = "FooName1",
-                house = "FooHouse1",
+                house = HouseType.SLYTHERIN,
                 imageUrl = "FooImageUrl1",
                 actorName = "FooActorName1",
-                gender = "FooGender1",
-                species = "FooSpecies1",
+                gender = GenderType.UNKNOWN,
+                species = SpeciesType.VAMPIRE,
                 birth = "01-01-1986"
             ),
             Character(
                 name = "",
-                house = "FooHouse2",
+                house = HouseType.RAVENCLAW,
                 imageUrl = "FooImageUrl2",
                 actorName = "FooActorName2",
-                gender = "FooGender2",
-                species = "FooSpecies2",
+                gender = GenderType.MALE,
+                species = SpeciesType.OWL,
                 birth = "02-02-1986"
             ),
             Character(
                 name = " ",
-                house = "FooHouse3",
+                house = HouseType.HUFFLEPUFF,
                 imageUrl = "FooImageUrl3",
                 actorName = "FooActorName3",
-                gender = "FooGender3",
-                species = "FooSpecies3",
+                gender = GenderType.MALE,
+                species = SpeciesType.UNKNOWN,
                 birth = "03-03-1986"
             ),
             Character(
                 name = "FooName4",
-                house = "FooHouse4",
+                house = HouseType.RAVENCLAW,
                 imageUrl = "FooImageUrl4",
                 actorName = "FooActorName4",
-                gender = "FooGender4",
-                species = "FooSpecies4",
+                gender = GenderType.FEMALE,
+                species = SpeciesType.HUMAN,
                 birth = "04-04-1986"
             ),
             Character(
                 name = "FooName5",
-                house = "FooHouse5",
+                house = HouseType.GRYFFINDOR,
                 imageUrl = "FooImageUrl5",
                 actorName = "FooActorName5",
-                gender = "FooGender5",
-                species = "FooSpecies5",
+                gender = GenderType.MALE,
+                species = SpeciesType.HIPPOGRIFF,
                 birth = "05-05-1986"
             ),
             Character(
                 name = "FooName6",
-                house = "FooHouse6",
+                house = HouseType.GRYFFINDOR,
                 imageUrl = "FooImageUrl6",
                 actorName = "FooActorName6",
-                gender = "FooGender6",
-                species = "FooSpecies6",
+                gender = GenderType.UNKNOWN,
+                species = SpeciesType.HUMAN,
                 birth = "06-06-1986"
             )
         )
@@ -68,38 +67,38 @@ interface CharactersFakeDomainGenerator {
         listOf(
             Character(
                 name = "FooName1",
-                house = "FooHouse1",
+                house = HouseType.SLYTHERIN,
                 imageUrl = "FooImageUrl1",
                 actorName = "FooActorName1",
-                gender = "FooGender1",
-                species = "FooSpecies1",
+                gender = GenderType.UNKNOWN,
+                species = SpeciesType.VAMPIRE,
                 birth = "01-01-1986"
             ),
             Character(
                 name = "FooName4",
-                house = "FooHouse4",
+                house = HouseType.RAVENCLAW,
                 imageUrl = "FooImageUrl4",
                 actorName = "FooActorName4",
-                gender = "FooGender4",
-                species = "FooSpecies4",
+                gender = GenderType.FEMALE,
+                species = SpeciesType.HUMAN,
                 birth = "04-04-1986"
             ),
             Character(
                 name = "FooName5",
-                house = "FooHouse5",
+                house = HouseType.GRYFFINDOR,
                 imageUrl = "FooImageUrl5",
                 actorName = "FooActorName5",
-                gender = "FooGender5",
-                species = "FooSpecies5",
+                gender = GenderType.MALE,
+                species = SpeciesType.HIPPOGRIFF,
                 birth = "05-05-1986"
             ),
             Character(
                 name = "FooName6",
-                house = "FooHouse6",
+                house = HouseType.GRYFFINDOR,
                 imageUrl = "FooImageUrl6",
                 actorName = "FooActorName6",
-                gender = "FooGender6",
-                species = "FooSpecies6",
+                gender = GenderType.UNKNOWN,
+                species = SpeciesType.HUMAN,
                 birth = "06-06-1986"
             )
         )

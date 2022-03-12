@@ -29,7 +29,6 @@ class CharacterDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character_detail)
-
         populate()
     }
 
@@ -37,11 +36,12 @@ class CharacterDetailActivity : AppCompatActivity() {
         with(getCharacter()) {
             imageLoader.loadImage(findViewById(R.id.pictureDetailImageView), imageUrl)
             findViewById<TextView>(R.id.nameDetailTextView).text = name
-            findViewById<TextView>(R.id.houseDetailTextView).text = house
+            findViewById<TextView>(R.id.houseDetailTextView).text = getString(house)
             findViewById<TextView>(R.id.actorNameDetailTextView).text = actorName
-            findViewById<TextView>(R.id.genderDetailTextView).text = gender
-            findViewById<TextView>(R.id.speciesDetailTextView).text = species
-            findViewById<TextView>(R.id.birthDetailTextView).text = birth
+            findViewById<TextView>(R.id.genderDetailTextView).text = getString(gender)
+            findViewById<TextView>(R.id.speciesDetailTextView).text = getString(species)
+            findViewById<TextView>(R.id.birthDetailTextView).text =
+                birth.ifBlank { getString(R.string.birthday_unknown) }
         }
     }
 

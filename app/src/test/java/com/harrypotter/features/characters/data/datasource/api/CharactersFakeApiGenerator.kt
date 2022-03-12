@@ -2,62 +2,65 @@ package com.harrypotter.features.characters.data.datasource.api
 
 import com.harrypotter.features.characters.data.datasource.api.model.CharacterResponse
 import com.harrypotter.features.characters.domain.model.Character
+import com.harrypotter.features.characters.domain.model.GenderType
+import com.harrypotter.features.characters.domain.model.HouseType
+import com.harrypotter.features.characters.domain.model.SpeciesType
 
 interface CharactersFakeApiGenerator {
 
     fun getCharactersResponseFake() = listOf(
         CharacterResponse(
             name = "FooName1",
-            house = "FooHouse1",
+            house = "Gryffindor",
             imageUrl = "FooImageUrl1",
             actorName = "FooActorName1",
-            gender = "FooGender1",
-            species = "FooSpecies1",
+            gender = "Male",
+            species = "human",
             birth = "01-01-1986"
         ),
         CharacterResponse(
             name = "FooName2",
-            house = "FooHouse2",
+            house = "Ravenclaw",
             imageUrl = "FooImageUrl2",
             actorName = "FooActorName2",
-            gender = "FooGender2",
-            species = "FooSpecies2",
+            gender = "Female",
+            species = "cat",
             birth = "02-02-1986"
         ),
         CharacterResponse(
             name = "FooName3",
-            house = "FooHouse3",
+            house = "Hufflepuff",
             imageUrl = "FooImageUrl3",
             actorName = "FooActorName3",
-            gender = "FooGender3",
-            species = "FooSpecies3",
+            gender = "Female",
+            species = "",
             birth = "03-03-1986"
         ),
         CharacterResponse(
             name = "FooName4",
-            house = "FooHouse4",
+            house = "",
             imageUrl = "FooImageUrl4",
             actorName = "FooActorName4",
-            gender = "FooGender4",
-            species = "FooSpecies4",
+            gender = "",
+            species = "owl",
             birth = "04-04-1986"
         ),
         CharacterResponse(
             name = "FooName5",
-            house = "FooHouse5",
+            house = "Ravenclaw",
             imageUrl = "FooImageUrl5",
             actorName = "FooActorName5",
-            gender = "FooGender5",
-            species = "FooSpecies5",
+            gender = "Male",
+            species = "Ghost",
             birth = "05-05-1986"
         ),
         CharacterResponse(
             name = "FooName6",
-            house = "FooHouse6",
+            house = "Slytherin",
             imageUrl = "FooImageUrl6",
             actorName = "FooActorName6",
-            gender = "FooGender6",
-            species = "FooSpecies6",
+            gender = "",
+            species = "Vampire",
             birth = "06-06-1986"
         )
     )
@@ -65,56 +68,56 @@ interface CharactersFakeApiGenerator {
     fun getCharactersExpected() = listOf(
         Character(
             name = "FooName1",
-            house = "FooHouse1",
+            house = HouseType.GRYFFINDOR,
             imageUrl = "FooImageUrl1",
             actorName = "FooActorName1",
-            gender = "FooGender1",
-            species = "FooSpecies1",
+            gender = GenderType.MALE,
+            species = SpeciesType.HUMAN,
             birth = "01-01-1986"
         ),
         Character(
             name = "FooName2",
-            house = "FooHouse2",
+            house = HouseType.RAVENCLAW,
             imageUrl = "FooImageUrl2",
             actorName = "FooActorName2",
-            gender = "FooGender2",
-            species = "FooSpecies2",
+            gender = GenderType.FEMALE,
+            species = SpeciesType.CAT,
             birth = "02-02-1986"
         ),
         Character(
             name = "FooName3",
-            house = "FooHouse3",
+            house = HouseType.HUFFLEPUFF,
             imageUrl = "FooImageUrl3",
             actorName = "FooActorName3",
-            gender = "FooGender3",
-            species = "FooSpecies3",
+            gender = GenderType.FEMALE,
+            species = SpeciesType.UNKNOWN,
             birth = "03-03-1986"
         ),
         Character(
             name = "FooName4",
-            house = "FooHouse4",
+            house = HouseType.UNKNOWN,
             imageUrl = "FooImageUrl4",
             actorName = "FooActorName4",
-            gender = "FooGender4",
-            species = "FooSpecies4",
+            gender = GenderType.UNKNOWN,
+            species = SpeciesType.OWL,
             birth = "04-04-1986"
         ),
         Character(
             name = "FooName5",
-            house = "FooHouse5",
+            house = HouseType.RAVENCLAW,
             imageUrl = "FooImageUrl5",
             actorName = "FooActorName5",
-            gender = "FooGender5",
-            species = "FooSpecies5",
+            gender = GenderType.MALE,
+            species = SpeciesType.GHOST,
             birth = "05-05-1986"
         ),
         Character(
             name = "FooName6",
-            house = "FooHouse6",
+            house = HouseType.SLYTHERIN,
             imageUrl = "FooImageUrl6",
             actorName = "FooActorName6",
-            gender = "FooGender6",
-            species = "FooSpecies6",
+            gender = GenderType.UNKNOWN,
+            species = SpeciesType.VAMPIRE,
             birth = "06-06-1986"
         )
     )

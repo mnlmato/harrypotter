@@ -1,6 +1,5 @@
 package com.harrypotter.features.characters.ui.adapter
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,7 +11,7 @@ import com.harrypotter.features.characters.vm.model.CharacterUI
 typealias OnCharacterClickListener = (CharacterUI) -> Unit
 
 class CharactersViewHolder(
-    view: View,
+    private val view: View,
     listener: OnCharacterClickListener,
     private val imageLoader: ImageLoader
 ) : RecyclerView.ViewHolder(view) {
@@ -35,7 +34,7 @@ class CharactersViewHolder(
         this.characterUI = characterUI
         with(characterUI) {
             nameTextView.text = name
-            houseTextView.text = house
+            houseTextView.text = view.context.getString(house)
             imageLoader.loadImage(pictureImageView, imageUrl)
         }
     }

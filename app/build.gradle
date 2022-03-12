@@ -61,6 +61,7 @@ android {
         testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
         testImplementation 'androidx.arch.core:core-testing:2.1.0'
         testImplementation 'io.mockk:mockk:1.10.0'
+        testImplementation 'io.kotest:kotest-runner-junit5-jvm:4.1.3'
         androidTestImplementation 'androidx.test.ext:junit:1.1.3'
 
         // Espresso dependencies
@@ -85,4 +86,8 @@ android {
 
 kapt {
     correctErrorTypes = true
+}
+
+dependencies {
+    implementation 'org.testng:testng:6.9.6'
 }

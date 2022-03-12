@@ -11,7 +11,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-class CharactersApiImplTest : CharactersFakeApiGenerator {
+class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
 
     private val mockCharactersApiDataSource = mockk<CharactersApiDatasource>()
     private lateinit var subject: CharactersRepositoryImpl

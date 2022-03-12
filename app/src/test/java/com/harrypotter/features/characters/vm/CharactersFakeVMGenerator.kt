@@ -1,7 +1,7 @@
 package com.harrypotter.features.characters.vm
 
-import com.harrypotter.features.characters.domain.model.Character
-import com.harrypotter.features.characters.domain.model.Characters
+import com.harrypotter.R
+import com.harrypotter.features.characters.domain.model.*
 import com.harrypotter.features.characters.vm.model.CharacterUI
 
 interface CharactersFakeVMGenerator {
@@ -10,47 +10,47 @@ interface CharactersFakeVMGenerator {
         listOf(
             Character(
                 name = "FooName1",
-                house = "",
+                house = HouseType.UNKNOWN,
                 imageUrl = "FooImageUrl1",
                 actorName = "FooActorName1",
-                gender = "FooGender1",
-                species = "FooSpecies1",
+                gender = GenderType.UNKNOWN,
+                species = SpeciesType.UNKNOWN,
                 birth = "01-01-1986"
             ),
             Character(
                 name = "FooName2",
-                house = "FooHouse2",
+                house = HouseType.SLYTHERIN,
                 imageUrl = "FooImageUrl2",
-                actorName = "",
-                gender = "FooGender2",
-                species = "FooSpecies2",
+                actorName = "FooActorName2",
+                gender = GenderType.MALE,
+                species = SpeciesType.HALF_HUMAN,
                 birth = "02-02-1986"
             ),
             Character(
                 name = "FooName3",
-                house = "FooHouse3",
+                house = HouseType.GRYFFINDOR,
                 imageUrl = "FooImageUrl3",
                 actorName = "FooActorName3",
-                gender = "FooGender3",
-                species = "",
+                gender = GenderType.FEMALE,
+                species = SpeciesType.GIANT,
                 birth = "03-03-1986"
             ),
             Character(
                 name = "FooName4",
-                house = "FooHouse4",
+                house = HouseType.RAVENCLAW,
                 imageUrl = "FooImageUrl4",
                 actorName = "FooActorName4",
-                gender = "FooGender4",
-                species = "FooSpecies4",
-                birth = ""
+                gender = GenderType.MALE,
+                species = SpeciesType.HOUSE_ELF,
+                birth = "04-04-1986"
             ),
             Character(
                 name = "FooName5",
-                house = "FooHouse5",
+                house = HouseType.HUFFLEPUFF,
                 imageUrl = "FooImageUrl5",
                 actorName = "FooActorName5",
-                gender = "",
-                species = "FooSpecies5",
+                gender = GenderType.UNKNOWN,
+                species = SpeciesType.CENTAUR,
                 birth = "05-05-1986"
             )
         )
@@ -59,47 +59,47 @@ interface CharactersFakeVMGenerator {
     fun getCharactersUIExpected() = listOf(
         CharacterUI(
             name = "FooName1",
-            house = "Unknown",
+            house = R.string.house_unknown,
             imageUrl = "FooImageUrl1",
             actorName = "FooActorName1",
-            gender = "FooGender1",
-            species = "FooSpecies1",
+            gender = R.string.gender_unknown,
+            species = R.string.species_unkwon,
             birth = "01-01-1986"
         ),
         CharacterUI(
             name = "FooName2",
-            house = "FooHouse2",
+            house = R.string.house_slytherin,
             imageUrl = "FooImageUrl2",
-            actorName = "Unknown",
-            gender = "FooGender2",
-            species = "FooSpecies2",
+            actorName = "FooActorName2",
+            gender = R.string.gender_male,
+            species = R.string.species_half_human,
             birth = "02-02-1986"
         ),
         CharacterUI(
             name = "FooName3",
-            house = "FooHouse3",
+            house = R.string.house_gryffindor,
             imageUrl = "FooImageUrl3",
             actorName = "FooActorName3",
-            gender = "FooGender3",
-            species = "Unknown",
+            gender = R.string.gender_female,
+            species = R.string.species_giant,
             birth = "03-03-1986"
         ),
         CharacterUI(
             name = "FooName4",
-            house = "FooHouse4",
+            house = R.string.house_ravenclaw,
             imageUrl = "FooImageUrl4",
             actorName = "FooActorName4",
-            gender = "FooGender4",
-            species = "FooSpecies4",
-            birth = "Unknown"
+            gender = R.string.gender_male,
+            species = R.string.species_house_elf,
+            birth = "04-04-1986"
         ),
         CharacterUI(
             name = "FooName5",
-            house = "FooHouse5",
+            house = R.string.house_hufflepuff,
             imageUrl = "FooImageUrl5",
             actorName = "FooActorName5",
-            gender = "Unknown",
-            species = "FooSpecies5",
+            gender = R.string.gender_unknown,
+            species = R.string.species_centaur,
             birth = "05-05-1986"
         )
     )

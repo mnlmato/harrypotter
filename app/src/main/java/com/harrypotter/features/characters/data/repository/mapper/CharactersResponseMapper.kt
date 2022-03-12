@@ -1,18 +1,17 @@
 package com.harrypotter.features.characters.data.repository.mapper
 
 import com.harrypotter.features.characters.data.datasource.api.model.CharacterResponse
-import com.harrypotter.features.characters.domain.model.Character
-import com.harrypotter.features.characters.domain.model.Characters
+import com.harrypotter.features.characters.domain.model.*
 
 fun List<CharacterResponse>.toCharacters() = Characters(
     list = this.map {
         Character(
             name = it.name,
-            house = it.house,
+            house = HouseResponseMapper(it.house).toType(),
             imageUrl = it.imageUrl,
             actorName = it.actorName,
-            gender = it.gender,
-            species = it.species,
+            gender = GenderResponseMapper(it.gender).toType(),
+            species = SpecieResponseMapper(it.species).toType(),
             birth = it.birth
         )
     }
