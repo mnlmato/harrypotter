@@ -1,7 +1,7 @@
 package com.harrypotter.features.characters.data.datasource.api
 
 import com.harrypotter.coreapp.DataResult
-import com.harrypotter.coreapp.exceptions.mapper.toCustomException
+import com.harrypotter.coredata.mapper.toCustomException
 import com.harrypotter.features.characters.data.datasource.api.model.CharacterResponse
 import java.lang.Exception
 import javax.inject.Inject

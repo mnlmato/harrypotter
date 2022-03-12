@@ -3,9 +3,8 @@ package com.harrypotter.features.characters.data.repository.mapper
 import com.harrypotter.coredata.mapper.ValueResponseMapper
 import com.harrypotter.features.characters.domain.model.SpeciesType
 
-@JvmInline
-value class SpecieResponseMapper(override val value: String) : ValueResponseMapper<SpeciesType> {
-    override fun toType() = when (value.lowercase()) {
+object SpeciesValueResponseMapper : ValueResponseMapper<SpeciesType> {
+    override fun toType(value: String) = when (value.lowercase()) {
         SPECIES_HUMAN -> SpeciesType.HUMAN
         SPECIES_HALF_GIANT -> SpeciesType.HALF_GIANT
         SPECIES_WEREWOLF -> SpeciesType.WEREWOLF

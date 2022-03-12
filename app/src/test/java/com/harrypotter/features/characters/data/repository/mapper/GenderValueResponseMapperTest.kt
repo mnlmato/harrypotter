@@ -6,7 +6,7 @@ import io.kotest.data.row
 import org.junit.Assert
 import org.junit.Test
 
-class GenderResponseMapperTest {
+class GenderValueResponseMapperTest {
 
     @Test
     fun `GIVEN a gender value WHEN toType THEN should returns right gender type`() {
@@ -15,7 +15,7 @@ class GenderResponseMapperTest {
             row(GENDER_FEMALE, GenderType.FEMALE),
             row("", GenderType.UNKNOWN),
         ) { value, genderType ->
-            val realResult = GenderResponseMapper(value).toType()
+            val realResult = GenderValueResponseMapper.toType(value)
 
             val expectedResult: GenderType = genderType
             Assert.assertEquals(expectedResult, realResult)

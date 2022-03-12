@@ -87,7 +87,3 @@ android {
 kapt {
     correctErrorTypes = true
 }
-
-dependencies {
-    implementation 'org.testng:testng:6.9.6'
-}

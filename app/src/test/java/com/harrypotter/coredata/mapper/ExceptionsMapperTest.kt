@@ -1,8 +1,7 @@
-package com.harrypotter.features.characters.coreapp.exceptions.mapper
+package com.harrypotter.coredata.mapper
 
 import com.harrypotter.coreapp.exceptions.GenericException
 import com.harrypotter.coreapp.exceptions.NetworkException
-import com.harrypotter.coreapp.exceptions.mapper.toCustomException
 import org.junit.Assert
 import org.junit.Test
 import java.io.IOException

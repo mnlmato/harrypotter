@@ -3,9 +3,8 @@ package com.harrypotter.features.characters.data.repository.mapper
 import com.harrypotter.coredata.mapper.ValueResponseMapper
 import com.harrypotter.features.characters.domain.model.HouseType
 
-@JvmInline
-value class HouseResponseMapper(override val value: String) : ValueResponseMapper<HouseType> {
-    override fun toType() = when (value.lowercase()) {
+object HouseValueResponseMapper : ValueResponseMapper<HouseType> {
+    override fun toType(value: String) = when (value.lowercase()) {
         HOUSE_GRYFFINDOR -> HouseType.GRYFFINDOR
         HOUSE_SLYTHERIN -> HouseType.SLYTHERIN
         HOUSE_HUFFLEPUFF -> HouseType.HUFFLEPUFF

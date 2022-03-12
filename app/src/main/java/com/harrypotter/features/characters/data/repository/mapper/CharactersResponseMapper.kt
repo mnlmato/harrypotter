@@ -7,11 +7,11 @@ fun List<CharacterResponse>.toCharacters() = Characters(
     list = this.map {
         Character(
             name = it.name,
-            house = HouseResponseMapper(it.house).toType(),
+            house = HouseValueResponseMapper.toType(it.house),
             imageUrl = it.imageUrl,
             actorName = it.actorName,
-            gender = GenderResponseMapper(it.gender).toType(),
-            species = SpecieResponseMapper(it.species).toType(),
+            gender = GenderValueResponseMapper.toType(it.gender),
+            species = SpeciesValueResponseMapper.toType(it.species),
             birth = it.birth
         )
     }

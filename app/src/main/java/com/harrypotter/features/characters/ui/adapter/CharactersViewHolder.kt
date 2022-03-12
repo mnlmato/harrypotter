@@ -12,8 +12,8 @@ typealias OnCharacterClickListener = (CharacterUI) -> Unit
 
 class CharactersViewHolder(
     private val view: View,
-    listener: OnCharacterClickListener,
-    private val imageLoader: ImageLoader
+    private val imageLoader: ImageLoader,
+    listener: OnCharacterClickListener
 ) : RecyclerView.ViewHolder(view) {
 
     private lateinit var characterUI: CharacterUI

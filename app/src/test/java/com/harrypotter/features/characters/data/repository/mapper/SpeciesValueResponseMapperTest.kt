@@ -6,7 +6,7 @@ import io.kotest.data.row
 import org.junit.Assert
 import org.junit.Test
 
-class SpecieResponseMapperTest {
+class SpeciesValueResponseMapperTest {
 
     @Test
     fun `GIVEN a species value WHEN toType THEN should returns right species type`() {
@@ -30,7 +30,7 @@ class SpecieResponseMapperTest {
             row(SPECIES_HALF_HUMAN, SpeciesType.HALF_HUMAN),
             row("", SpeciesType.UNKNOWN),
         ) { value, specieType ->
-            val realResult = SpecieResponseMapper(value).toType()
+            val realResult = SpeciesValueResponseMapper.toType(value)
 
             val expectedResult: SpeciesType = specieType
             Assert.assertEquals(expectedResult, realResult)

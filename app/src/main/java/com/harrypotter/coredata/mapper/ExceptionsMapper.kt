@@ -1,4 +1,4 @@
-package com.harrypotter.coreapp.exceptions.mapper
+package com.harrypotter.coredata.mapper
 
 import com.harrypotter.coreapp.exceptions.GenericException
 import com.harrypotter.coreapp.exceptions.NetworkException

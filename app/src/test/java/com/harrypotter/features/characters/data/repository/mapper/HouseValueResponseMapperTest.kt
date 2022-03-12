@@ -6,7 +6,7 @@ import io.kotest.data.row
 import org.junit.Assert
 import org.junit.Test
 
-class HouseResponseMapperTest {
+class HouseValueResponseMapperTest {
 
     @Test
     fun `GIVEN a house value WHEN toType THEN should returns right house type`() {
@@ -17,7 +17,7 @@ class HouseResponseMapperTest {
             row(HOUSE_RAVENCLAW, HouseType.RAVENCLAW),
             row("", HouseType.UNKNOWN),
         ) { value, houseType ->
-            val realResult = HouseResponseMapper(value).toType()
+            val realResult = HouseValueResponseMapper.toType(value)
 
             val expectedResult: HouseType = houseType
             Assert.assertEquals(expectedResult, realResult)
