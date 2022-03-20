@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.activity.viewModels
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -23,7 +24,8 @@ class CharactersActivity : AppCompatActivity() {
     @Inject
     lateinit var imageLoader: ImageLoader
 
-    private val viewModel: CharactersViewModel by viewModels()
+    @VisibleForTesting
+    val viewModel: CharactersViewModel by viewModels()
 
     private val charactersAdapter: CharactersAdapter by lazy {
         CharactersAdapter(imageLoader) {
