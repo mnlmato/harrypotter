@@ -3,21 +3,20 @@ package com.harrypotter.features.characters
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import com.harrypotter.R
 import com.harrypotter.coredata.di.UrlProviderModule
-import com.harrypotter.features.characters.data.datasource.api.CHARACTERS_ENDPOINT
 import com.harrypotter.features.characters.pages.CharacterDetailPage
 import com.harrypotter.features.characters.pages.CharactersPage
 import com.harrypotter.features.characters.ui.CharactersActivity
 import com.harrypotter.features.characters.vm.model.CharacterUI
 import com.harrypotter.rules.MockWebServerRule
 import com.harrypotter.testdependencies.mockwebserver.getCharactersSuccessResponse
-import com.harrypotter.testdependencies.mockwebserver.getError
+import com.harrypotter.viewinteraction.extensions.isDisplayed
+import com.harrypotter.viewinteraction.extensions.isNotDisplayed
+import com.harrypotter.viewinteraction.extensions.isTextMatching
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
-import okhttp3.mockwebserver.Dispatcher
-import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.RecordedRequest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -57,34 +56,30 @@ class CharactersScreenFlow {
     @Test
     @LargeTest
     fun givenSuccessResponseWhenClickOnItemCharactersDetailIsShowed() {
-        loadSuccessResponse()
-        charactersPage.isPageDisplayed()
-        charactersPage.loadingIsInvisible()
-        charactersPage.clickItem(0)
-        characterDetailPage.isPageDisplayed()
-        characterDetailPage.checkExpectedDataIsShowed(
-            CharacterUI(
-                name = "Harry Potter",
-                house = "Gryffindor",
-                imageUrl = "http://hp-api.herokuapp.com/images/harry.jpg",
-                actorName = "Daniel Radcliffe",
-                gender = "male",
-                species = "human",
-                birth = "31-07-1980"
-            )
-        )
-    }
+        mockWebServerRule.mockWebServer.enqueue(mockWebServerRule.mockWebServer.getCharactersSuccessResponse())
 
-    private fun loadSuccessResponse() {
-        mockWebServerRule.mockWebServer.apply {
-            dispatcher = object : Dispatcher() {
-                override fun dispatch(request: RecordedRequest): MockResponse {
-                    return when (request.path) {
-                        "/$CHARACTERS_ENDPOINT" -> mockWebServerRule.mockWebServer.getCharactersSuccessResponse()
-                        else -> mockWebServerRule.mockWebServer.getError()
-                    }
-                }
-            }
+        charactersPage.mainPageView.isDisplayed()
+        charactersPage.loadingView.isNotDisplayed()
+
+        charactersPage.clickItem(0)
+
+        characterDetailPage.mainPageView.isDisplayed()
+        val expectedData = CharacterUI(
+            name = "Harry Potter",
+            house = R.string.house_gryffindor,
+            imageUrl = "http://hp-api.herokuapp.com/images/harry.jpg",
+            actorName = "Daniel Radcliffe",
+            gender = R.string.gender_male,
+            species = R.string.species_human,
+            birth = "31-07-1980"
+        )
+        with(expectedData) {
+            characterDetailPage.nameDetailTextView.isTextMatching(name)
+            characterDetailPage.houseDetailTextView.isTextMatching(house)
+            characterDetailPage.actorNameDetailTextView.isTextMatching(actorName)
+            characterDetailPage.genderDetailTextView.isTextMatching(gender)
+            characterDetailPage.speciesDetailTextView.isTextMatching(species)
+            characterDetailPage.birthDetailTextView.isTextMatching(birth)
         }
     }
 }
