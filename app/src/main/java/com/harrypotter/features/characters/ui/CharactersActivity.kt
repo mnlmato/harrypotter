@@ -24,8 +24,7 @@ class CharactersActivity : AppCompatActivity() {
     @Inject
     lateinit var imageLoader: ImageLoader
 
-    @VisibleForTesting
-    val viewModel: CharactersViewModel by viewModels()
+    private val viewModel: CharactersViewModel by viewModels()
 
     private val charactersAdapter: CharactersAdapter by lazy {
         CharactersAdapter(imageLoader) {
