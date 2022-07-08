@@ -8,8 +8,9 @@ import com.harrypotter.viewinteraction.extensions.performItemClickAtPosition
 class CharactersPage {
 
     val mainPageView = ViewInteractionTest(R.id.charactersMainView)
-    val charactersList = ViewInteractionTest(R.id.charactersRecyclerView)
     val loadingView = ViewInteractionTest(R.id.loadingView)
+    val charactersList = ViewInteractionTest(R.id.charactersRecyclerView)
+    val genericErrorMainView = ViewInteractionTest(R.id.genericErrorMainViewGroup)
 
     fun clickItem(position: Int) {
         charactersList.performItemClickAtPosition<CharactersViewHolder>(position)
