@@ -8,27 +8,16 @@ import org.junit.runners.model.Statement
 
 class MockWebServerRule : TestRule {
 
-    lateinit var mockWebServer: MockWebServer
-        private set
+    val mockWebServer = MockWebServer()
 
     override fun apply(base: Statement, description: Description?) = object : Statement() {
         override fun evaluate() {
-            startServer()
+            mockWebServer.start(PORT_LOCALHOST)
             try {
                 base.evaluate()
             } finally {
-                stopServer()
+                mockWebServer.shutdown()
             }
         }
-    }
-
-    private fun startServer() {
-        mockWebServer = MockWebServer().apply {
-            start(PORT_LOCALHOST)
-        }
-    }
-
-    private fun stopServer() {
-        mockWebServer.shutdown()
     }
 }

@@ -1,6 +1,5 @@
 package com.harrypotter.features.characters
 
-import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -57,8 +56,7 @@ class CharactersScreenFlow {
     @Before
     fun setUp() {
         hiltRule.inject()
-
-        // IdlingRegistry.getInstance().register(OkHttp3IdlingResource.create("okhttp", okHttpClient))
+        IdlingRegistry.getInstance().register(OkHttp3IdlingResource.create("okhttp", okHttpClient))
     }
 
     @After
@@ -69,8 +67,6 @@ class CharactersScreenFlow {
     @Test
     fun givenSuccessResponseWhenClickOnItemCharactersDetailIsShowed() {
         mockWebServerRule.mockWebServer.apply { enqueue(getCharactersSuccessResponse()) }
-
-        charactersPage.mainPageView.isDisplayed()
 
         charactersPage.clickItem(0)
 
@@ -92,7 +88,6 @@ class CharactersScreenFlow {
             species = R.string.species_human,
             birth = "31-07-1980"
         )
-
         with(expectedData) {
             characterDetailPage.nameDetailTextView.isTextMatching(name)
             characterDetailPage.houseDetailTextView.isTextMatching(house)
@@ -104,20 +99,19 @@ class CharactersScreenFlow {
     }
 
     @Test
-    fun giveSuccessResponseWhenScreenIsLoadingThenShowAndHideLoadingViews() {
-        val loadingInvisibleIdlingResource = getLoadingInvisibleIdlingResource(activityScenarioRule)
-
+    fun whenScreenRunsThenIsLoadingViewIsShowed() {
         charactersPage.loadingView.isDisplayed()
-
         mockWebServerRule.mockWebServer.apply { enqueue(getCharactersSuccessResponse()) }
-
-        IdlingRegistry.getInstance().register(loadingInvisibleIdlingResource)
-        charactersPage.loadingView.isNotDisplayed()
-        IdlingRegistry.getInstance().unregister(loadingInvisibleIdlingResource)
     }
 
     @Test
-    fun givenErrorResponseWhenScreenIsLoadingThenGenericErrorIsDisplayed() {
+    fun whenResponseIsLoadedThenIsLoadingViewIsHidden() {
+        mockWebServerRule.mockWebServer.apply { enqueue(getCharactersSuccessResponse()) }
+        charactersPage.loadingView.isNotDisplayed()
+    }
+
+    @Test
+    fun whenResponseIsErrorThenGenericErrorIsDisplayed() {
         mockWebServerRule.mockWebServer.apply { enqueue(getError(HttpCodeType.ERROR_404)) }
 
         charactersPage.genericErrorMainView.isDisplayed()
