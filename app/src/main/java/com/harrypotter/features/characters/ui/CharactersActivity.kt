@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.activity.viewModels
-import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
