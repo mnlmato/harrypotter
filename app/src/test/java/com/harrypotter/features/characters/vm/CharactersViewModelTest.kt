@@ -3,10 +3,12 @@ package com.harrypotter.features.characters.vm
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.harrypotter.coreapp.DataResult
 import com.harrypotter.coreapp.exceptions.GenericException
+import com.harrypotter.coreui.resourceprovider.ResourceProvider
 import com.harrypotter.features.characters.domain.usecase.GetCharactersUseCase
 import com.harrypotter.utils.CoroutinesDispatchersTestImpl
 import com.harrypotter.utils.getOrAwaitValue
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -19,7 +21,8 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
-    private val getCharactersUseCase = mockk<GetCharactersUseCase>()
+    private val getCharactersUseCase: GetCharactersUseCase = mockk()
+    private val resourceProvider: ResourceProvider = mockk()
     private val coroutinesDispatchers = CoroutinesDispatchersTestImpl(testCoroutineDispatcher)
     private lateinit var subject: CharactersViewModel
 
@@ -27,6 +30,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
     fun setUp() {
         subject = CharactersViewModel(
             getCharactersUseCase,
+            resourceProvider,
             coroutinesDispatchers
         )
     }
@@ -39,6 +43,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
     @Test
     fun `GIVEN result success WHE loadCharacters THEN livedata should show right charactersUI`() {
         coEvery { getCharactersUseCase() } returns DataResult.Success(getCharactersFake())
+        every { resourceProvider.getString(any()) } returns "Foo"
 
         subject.loadCharacters()
 

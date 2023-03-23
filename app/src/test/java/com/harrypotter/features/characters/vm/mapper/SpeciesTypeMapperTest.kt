@@ -1,13 +1,18 @@
 package com.harrypotter.features.characters.vm.mapper
 
 import com.harrypotter.R
+import com.harrypotter.coreui.resourceprovider.ResourceProvider
 import com.harrypotter.features.characters.domain.model.SpeciesType
 import io.kotest.data.blocking.forAll
 import io.kotest.data.row
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.Assert
 import org.junit.Test
 
 class SpeciesTypeMapperTest {
+
+    private val resourceProvider: ResourceProvider = mockk()
 
     @Test
     fun `GIVEN a speciesType WHEN toStringRes THEN should returns right string res`() {
@@ -31,9 +36,10 @@ class SpeciesTypeMapperTest {
             row(SpeciesType.HALF_HUMAN, R.string.species_half_human),
             row(SpeciesType.UNKNOWN, R.string.species_unkwon),
         ) { specieType, stringRes ->
-            val realResult = specieType.toStringRes()
+            every { resourceProvider.getString(stringRes) } returns "fooResultFromProvider"
+            val realResult = specieType.mapToString(resourceProvider)
 
-            val expectedResult: Int = stringRes
+            val expectedResult = "fooResultFromProvider"
             Assert.assertEquals(expectedResult, realResult)
         }
     }

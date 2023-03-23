@@ -34,7 +34,6 @@ class CharactersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_characters)
-
         viewModel.loadCharacters()
         initViews()
         setListeners()
