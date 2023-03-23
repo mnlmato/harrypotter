@@ -9,5 +9,5 @@ data class CharacterResponse(
     @SerializedName("actor") val actorName: String,
     @SerializedName("gender") val gender: String,
     @SerializedName("species") val species: String,
-    @SerializedName("dateOfBirth") val birth: String
+    @SerializedName("dateOfBirth") val birth: String?
 )

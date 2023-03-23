@@ -12,7 +12,7 @@ fun List<CharacterResponse>.toCharacters() = Characters(
             actorName = it.actorName,
             gender = GenderValueResponseMapper.toType(it.gender),
             species = SpeciesValueResponseMapper.toType(it.species),
-            birth = it.birth
+            birth = it.birth ?: ""
         )
     }
 )
