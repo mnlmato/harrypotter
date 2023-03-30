@@ -1,3 +1,39 @@
 <resources>
     <string name="app_name">HarryPotter</string>
+
+    <string name="generic_error_title">An error has occurred. Please, try again.</string>
+    <string name="generic_error_retry_button">Retry</string>
+
+    <string name="house_gryffindor">Gryffindor</string>
+    <string name="house_slytherin">Slytherin</string>
+    <string name="house_hufflepuff">Hufflepuff</string>
+    <string name="house_ravenclaw">Ravenclaw</string>
+    <string name="house_unknown">Unknown house</string>
+
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_unknown">Unknown gender</string>
+
+    <string name="species_human">Human</string>
+    <string name="species_half_giant">Half giant</string>
+    <string name="species_werewolf">Werewolf</string>
+    <string name="species_cat">Cat</string>
+    <string name="species_goblin">Goblin</string>
+    <string name="species_owl">Owl</string>
+    <string name="species_ghost">Ghost</string>
+    <string name="species_poltergeist">Poltergeist</string>
+    <string name="species_three_headed_dog">Three headed dog</string>
+    <string name="species_dragon">Dragon</string>
+    <string name="species_centaur">Centaur</string>
+    <string name="species_house_elf">House elf</string>
+    <string name="species_acromantula">Acromantula</string>
+    <string name="species_hippogriff">Hippogriff</string>
+    <string name="species_giant">Giant</string>
+    <string name="species_vampire">Vampire</string>
+    <string name="species_half_human">Half human</string>
+    <string name="species_unkwon">Unknown specie</string>
+
+    <string name="birthday_unknown">Unknown birthday</string>
+
+    <string name="detail_screen_title">Detail</string>
 </resources>
