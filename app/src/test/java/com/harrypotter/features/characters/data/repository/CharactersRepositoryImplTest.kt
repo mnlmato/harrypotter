@@ -2,8 +2,9 @@ package com.harrypotter.features.characters.data.repository
 
 import com.harrypotter.coreapp.DataResult
 import com.harrypotter.coreapp.exceptions.GenericException
-import com.harrypotter.features.characters.data.datasource.api.CharactersApiDatasource
+import com.harrypotter.features.characters.main.data.datasource.api.CharactersApiDatasource
 import com.harrypotter.features.characters.data.datasource.api.CharactersFakeApiGenerator
+import com.harrypotter.features.characters.main.data.repository.CharactersRepositoryImpl
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking

@@ -1,7 +1,8 @@
 package com.harrypotter.features.characters.vm
 
-import com.harrypotter.features.characters.domain.model.*
-import com.harrypotter.features.characters.vm.model.CharacterUI
+import com.harrypotter.features.characters.main.domain.model.*
+import com.harrypotter.features.characters.main.vm.model.CharacterUI
+import com.harrypotter.features.characters.main.vm.model.CharactersListUI
 
 interface CharactersFakeVMGenerator {
 
@@ -55,51 +56,55 @@ interface CharactersFakeVMGenerator {
         )
     )
 
-    fun getCharactersUIExpected() = listOf(
-        CharacterUI(
-            name = "FooName1",
-            house = "Foo",
-            imageUrl = "FooImageUrl1",
-            actorName = "FooActorName1",
-            gender = "Foo",
-            species = "Foo",
-            birth = "01-01-1986"
-        ),
-        CharacterUI(
-            name = "FooName2",
-            house = "Foo",
-            imageUrl = "FooImageUrl2",
-            actorName = "FooActorName2",
-            gender = "Foo",
-            species = "Foo",
-            birth = "02-02-1986"
-        ),
-        CharacterUI(
-            name = "FooName3",
-            house = "Foo",
-            imageUrl = "FooImageUrl3",
-            actorName = "FooActorName3",
-            gender = "Foo",
-            species = "Foo",
-            birth = "03-03-1986"
-        ),
-        CharacterUI(
-            name = "FooName4",
-            house = "Foo",
-            imageUrl = "FooImageUrl4",
-            actorName = "FooActorName4",
-            gender = "Foo",
-            species = "Foo",
-            birth = "04-04-1986"
-        ),
-        CharacterUI(
-            name = "FooName5",
-            house = "Foo",
-            imageUrl = "FooImageUrl5",
-            actorName = "FooActorName5",
-            gender = "Foo",
-            species = "Foo",
-            birth = "05-05-1986"
+    fun getCharactersUIExpected(): CharactersListUI {
+        val map = mutableMapOf<String, List<CharacterUI>>()
+        map["Foo"] = listOf(
+            CharacterUI(
+                name = "FooName1",
+                house = "Foo",
+                imageUrl = "FooImageUrl1",
+                actorName = "FooActorName1",
+                gender = "Foo",
+                species = "Foo",
+                birth = "01-01-1986"
+            ),
+            CharacterUI(
+                name = "FooName2",
+                house = "Foo",
+                imageUrl = "FooImageUrl2",
+                actorName = "FooActorName2",
+                gender = "Foo",
+                species = "Foo",
+                birth = "02-02-1986"
+            ),
+            CharacterUI(
+                name = "FooName3",
+                house = "Foo",
+                imageUrl = "FooImageUrl3",
+                actorName = "FooActorName3",
+                gender = "Foo",
+                species = "Foo",
+                birth = "03-03-1986"
+            ),
+            CharacterUI(
+                name = "FooName4",
+                house = "Foo",
+                imageUrl = "FooImageUrl4",
+                actorName = "FooActorName4",
+                gender = "Foo",
+                species = "Foo",
+                birth = "04-04-1986"
+            ),
+            CharacterUI(
+                name = "FooName5",
+                house = "Foo",
+                imageUrl = "FooImageUrl5",
+                actorName = "FooActorName5",
+                gender = "Foo",
+                species = "Foo",
+                birth = "05-05-1986"
+            )
         )
-    )
+        return CharactersListUI(map)
+    }
 }
