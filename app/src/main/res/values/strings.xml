@@ -34,4 +34,6 @@
     <string name="species_unkwon">Unknown specie</string>
 
     <string name="birthday_unknown">Unknown birthday</string>
+
+    <string name="detail_screen_title">Detail</string>
 </resources>

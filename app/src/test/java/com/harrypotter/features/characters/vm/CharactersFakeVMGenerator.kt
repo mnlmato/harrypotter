@@ -1,6 +1,5 @@
 package com.harrypotter.features.characters.vm
 
-import com.harrypotter.R
 import com.harrypotter.features.characters.domain.model.*
 import com.harrypotter.features.characters.vm.model.CharacterUI
 
@@ -59,47 +58,47 @@ interface CharactersFakeVMGenerator {
     fun getCharactersUIExpected() = listOf(
         CharacterUI(
             name = "FooName1",
-            house = R.string.house_unknown,
+            house = "Foo",
             imageUrl = "FooImageUrl1",
             actorName = "FooActorName1",
-            gender = R.string.gender_unknown,
-            species = R.string.species_unkwon,
+            gender = "Foo",
+            species = "Foo",
             birth = "01-01-1986"
         ),
         CharacterUI(
             name = "FooName2",
-            house = R.string.house_slytherin,
+            house = "Foo",
             imageUrl = "FooImageUrl2",
             actorName = "FooActorName2",
-            gender = R.string.gender_male,
-            species = R.string.species_half_human,
+            gender = "Foo",
+            species = "Foo",
             birth = "02-02-1986"
         ),
         CharacterUI(
             name = "FooName3",
-            house = R.string.house_gryffindor,
+            house = "Foo",
             imageUrl = "FooImageUrl3",
             actorName = "FooActorName3",
-            gender = R.string.gender_female,
-            species = R.string.species_giant,
+            gender = "Foo",
+            species = "Foo",
             birth = "03-03-1986"
         ),
         CharacterUI(
             name = "FooName4",
-            house = R.string.house_ravenclaw,
+            house = "Foo",
             imageUrl = "FooImageUrl4",
             actorName = "FooActorName4",
-            gender = R.string.gender_male,
-            species = R.string.species_house_elf,
+            gender = "Foo",
+            species = "Foo",
             birth = "04-04-1986"
         ),
         CharacterUI(
             name = "FooName5",
-            house = R.string.house_hufflepuff,
+            house = "Foo",
             imageUrl = "FooImageUrl5",
             actorName = "FooActorName5",
-            gender = R.string.gender_unknown,
-            species = R.string.species_centaur,
+            gender = "Foo",
+            species = "Foo",
             birth = "05-05-1986"
         )
     )

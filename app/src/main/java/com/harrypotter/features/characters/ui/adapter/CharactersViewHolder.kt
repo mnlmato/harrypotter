@@ -34,7 +34,7 @@ class CharactersViewHolder(
         this.characterUI = characterUI
         with(characterUI) {
             nameTextView.text = name
-            houseTextView.text = view.context.getString(house)
+            houseTextView.text = house
             imageLoader.loadImage(pictureImageView, imageUrl)
         }
     }

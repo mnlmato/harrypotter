@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.harrypotter.coreui.dispatchers.CoroutinesDispatchers
+import com.harrypotter.coreui.resourceprovider.ResourceProvider
+import com.harrypotter.coreui.vm.SingleLiveData
 import com.harrypotter.features.characters.domain.usecase.GetCharactersUseCase
 import com.harrypotter.features.characters.vm.mapper.toCharactersUI
 import com.harrypotter.features.characters.vm.model.CharacterUI
@@ -16,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
     private val getCharactersUseCase: GetCharactersUseCase,
+    private val resourceProvider: ResourceProvider,
     private val coroutinesDispatchers: CoroutinesDispatchers
 ) : ViewModel() {
 
@@ -31,9 +34,7 @@ class CharactersViewModel @Inject constructor(
     val showGenericErrorEvent: LiveData<Boolean>
         get() = showGenericErrorMutableEvent
 
-    private var showDetailMutableEvent = MutableLiveData<CharacterUI>()
-    val showDetailEvent: LiveData<CharacterUI>
-        get() = showDetailMutableEvent
+    val showDetailEvent = SingleLiveData<CharacterUI>()
 
     fun onRetryButtonClicked() {
         showGenericErrorMutableEvent.value = false
@@ -46,7 +47,7 @@ class CharactersViewModel @Inject constructor(
             withContext(coroutinesDispatchers.io) {
                 getCharactersUseCase().fold(
                     onSuccess = {
-                        val charactersUI = it.toCharactersUI()
+                        val charactersUI = it.toCharactersUI(resourceProvider)
                         charactersMutableEvent.postValue(charactersUI)
                     },
                     onError = {
@@ -59,6 +60,6 @@ class CharactersViewModel @Inject constructor(
     }
 
     fun onItemClick(character: CharacterUI) {
-        showDetailMutableEvent.value = character
+        showDetailEvent.value = character
     }
 }

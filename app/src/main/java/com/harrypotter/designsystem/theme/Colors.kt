@@ -3,10 +3,12 @@ package com.harrypotter.designsystem.theme
 import androidx.compose.ui.graphics.Color
 
 object CustomColors {
-    val purple200 = Color(0xFFBB86FC)
-    val purple500 = Color(0xFF6200EE)
-    val purple700 = Color(0xFF3700B3)
-    val teal200 = Color(0xFF03DAC5)
-    val black = Color(0xFF000000)
-    val white = Color(0xFFFFFFFF)
+    val yellow200 = Color(0xFFFFD66D)
+    val yellow600 = Color(0xFFF6C336)
+    val green200 = Color(0xFF81C784)
+    val green800 = Color(0xFF2E7D32)
+    val red200 = Color(0xFFEF9A9A)
+    val red800 = Color(0xFFC62828)
+    val gray200 = Color(0xFFEEEEEE)
+    val gray800 = Color(0xFF424242)
 }
