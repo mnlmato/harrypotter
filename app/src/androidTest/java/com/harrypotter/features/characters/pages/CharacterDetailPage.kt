@@ -1,17 +1,33 @@
 package com.harrypotter.features.characters.pages
 
-import com.harrypotter.R
+import androidx.compose.ui.test.junit4.ComposeTestRule
+import com.harrypotter.features.characters.detail.ui.design.*
 import com.harrypotter.viewinteraction.ViewInteractionTest
 
-class CharacterDetailPage {
-/*
-    val mainPageView = ViewInteractionTest(R.id.characterDetailMainView)
-    val nameDetailTextView = ViewInteractionTest(R.id.nameDetailTextView)
-    val houseDetailTextView = ViewInteractionTest(R.id.houseDetailTextView)
-    val actorNameDetailTextView = ViewInteractionTest(R.id.actorNameDetailTextView)
-    val genderDetailTextView = ViewInteractionTest(R.id.genderDetailTextView)
-    val speciesDetailTextView = ViewInteractionTest(R.id.speciesDetailTextView)
-    val birthDetailTextView = ViewInteractionTest(R.id.birthDetailTextView)
+class CharacterDetailPage(composeTestRule: ComposeTestRule) {
 
- */
+    private val mainPageView =
+        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_TOOLBAR_TEST_TAG)
+
+    val nameDetailTextView =
+        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_NAME_TEST_TAG)
+
+    val houseDetailTextView =
+        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_HOUSE_TEST_TAG)
+
+    val actorNameDetailTextView =
+        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_ACTOR_NAME_TEST_TAG)
+
+    val genderDetailTextView =
+        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_GENDER_TEST_TAG)
+
+    val speciesDetailTextView =
+        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_SPECIES_TEST_TAG)
+
+    val birthdayDetailTextView =
+        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_BIRTHDAY_TEST_TAG)
+
+    fun isScreenDisplayed() {
+        mainPageView.isDisplayed()
+    }
 }
