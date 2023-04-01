@@ -12,14 +12,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HarryPotter"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
 
         <activity
-            android:name="com.harrypotter.features.characters.ui.CharactersActivity"
+            android:name="com.harrypotter.features.characters.main.ui.CharactersActivity"
             android:exported="true"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".features.characters.ui.CharacterDetailActivity"
+            android:name=".features.characters.detail.ui.CharacterDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" />

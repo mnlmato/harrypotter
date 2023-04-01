@@ -4,7 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.harrypotter.coreapp.DataResult
 import com.harrypotter.coreapp.exceptions.GenericException
 import com.harrypotter.coreui.resourceprovider.ResourceProvider
-import com.harrypotter.features.characters.domain.usecase.GetCharactersUseCase
+import com.harrypotter.features.characters.main.domain.usecase.GetCharactersUseCase
+import com.harrypotter.features.characters.main.vm.CharactersViewModel
+import com.harrypotter.features.characters.main.vm.model.CharacterUI
+import com.harrypotter.features.characters.main.vm.model.CharactersState
 import com.harrypotter.utils.CoroutinesDispatchersTestImpl
 import com.harrypotter.utils.getOrAwaitValue
 import io.mockk.coEvery
@@ -47,8 +50,8 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
 
         subject.loadCharacters()
 
-        val realResult = subject.charactersEvent.getOrAwaitValue()
-        val expectedResult = getCharactersUIExpected()
+        val realResult = subject.charactersStateEvent.getOrAwaitValue()
+        val expectedResult = CharactersState.Success(getCharactersUIExpected())
         Assert.assertEquals(expectedResult, realResult)
     }
 
@@ -58,14 +61,22 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
 
         subject.loadCharacters()
 
-        val realResult = subject.showGenericErrorEvent.getOrAwaitValue()
-        val expectedResult = true
+        val realResult = subject.charactersStateEvent.getOrAwaitValue()
+        val expectedResult = CharactersState.Error
         Assert.assertEquals(expectedResult, realResult)
     }
 
     @Test
     fun `WHEN onItemClick THEN show detail screen event`() {
-        val expectedResult = getCharactersUIExpected().first()
+        val expectedResult = CharacterUI(
+            name = "FooName1",
+            house = "Foo",
+            imageUrl = "FooImageUrl1",
+            actorName = "FooActorName1",
+            gender = "Foo",
+            species = "Foo",
+            birth = "01-01-1986"
+        )
 
         subject.onItemClick(expectedResult)
 
@@ -74,25 +85,17 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
     }
 
     @Test
-    fun `GIVEN a result WHEN loadCharacters THEN show loading before response and hide loading after response`() {
+    fun `GIVEN a result WHEN loadCharacters THEN show loading before response`() {
         coEvery { getCharactersUseCase() } returns DataResult.Success(getCharactersFake())
 
         testCoroutineDispatcher.pauseDispatcher()
         subject.loadCharacters()
 
-        val isLoadingShowedBeforeResponseExpected = true
-        val isLoadingShowedBeforeResponseReal = subject.showLoadingEvent.getOrAwaitValue()
+        val isLoadingShowedBeforeResponseExpected = CharactersState.Loading
+        val isLoadingShowedBeforeResponseReal = subject.charactersStateEvent.getOrAwaitValue()
         Assert.assertEquals(
             isLoadingShowedBeforeResponseExpected,
             isLoadingShowedBeforeResponseReal
-        )
-
-        testCoroutineDispatcher.resumeDispatcher()
-        val isLoadingShowedAfterResponseExpected = true
-        val isLoadingShowedAfterResponseReal = subject.showLoadingEvent.getOrAwaitValue()
-        Assert.assertEquals(
-            isLoadingShowedAfterResponseExpected,
-            isLoadingShowedAfterResponseReal
         )
     }
 }

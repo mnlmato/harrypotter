@@ -2,7 +2,8 @@ package com.harrypotter.features.characters.domain.usecase
 
 import com.harrypotter.coreapp.DataResult
 import com.harrypotter.coreapp.exceptions.GenericException
-import com.harrypotter.features.characters.domain.CharactersRepository
+import com.harrypotter.features.characters.main.domain.CharactersRepository
+import com.harrypotter.features.characters.main.domain.usecase.GetCharactersUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi

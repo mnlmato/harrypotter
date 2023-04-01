@@ -1,6 +1,6 @@
 package com.harrypotter.features.characters.domain.usecase
 
-import com.harrypotter.features.characters.domain.model.*
+import com.harrypotter.features.characters.main.domain.model.*
 
 interface CharactersFakeDomainGenerator {
 

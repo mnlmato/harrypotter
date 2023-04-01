@@ -1,6 +1,7 @@
 package com.harrypotter.features.characters.data.repository.mapper
 
-import com.harrypotter.features.characters.domain.model.SpeciesType
+import com.harrypotter.features.characters.main.domain.model.SpeciesType
+import com.harrypotter.features.characters.main.data.repository.mapper.SpeciesValueResponseMapper
 import io.kotest.data.blocking.forAll
 import io.kotest.data.row
 import org.junit.Assert

@@ -1,7 +1,8 @@
 package com.harrypotter.features.characters.data.repository.mapper
 
 import com.harrypotter.features.characters.data.datasource.api.CharactersFakeApiGenerator
-import com.harrypotter.features.characters.domain.model.Characters
+import com.harrypotter.features.characters.main.domain.model.Characters
+import com.harrypotter.features.characters.main.data.repository.mapper.toCharacters
 import org.junit.Assert
 import org.junit.Test
 

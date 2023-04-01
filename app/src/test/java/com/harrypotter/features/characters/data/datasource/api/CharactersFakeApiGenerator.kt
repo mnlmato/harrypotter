@@ -1,10 +1,10 @@
 package com.harrypotter.features.characters.data.datasource.api
 
-import com.harrypotter.features.characters.data.datasource.api.model.CharacterResponse
-import com.harrypotter.features.characters.domain.model.Character
-import com.harrypotter.features.characters.domain.model.GenderType
-import com.harrypotter.features.characters.domain.model.HouseType
-import com.harrypotter.features.characters.domain.model.SpeciesType
+import com.harrypotter.features.characters.main.data.datasource.api.model.CharacterResponse
+import com.harrypotter.features.characters.main.domain.model.Character
+import com.harrypotter.features.characters.main.domain.model.GenderType
+import com.harrypotter.features.characters.main.domain.model.HouseType
+import com.harrypotter.features.characters.main.domain.model.SpeciesType
 
 interface CharactersFakeApiGenerator {
 

@@ -2,6 +2,8 @@ package com.harrypotter.features.characters.data.datasource.api
 
 import com.harrypotter.coreapp.DataResult
 import com.harrypotter.coreapp.exceptions.NetworkException
+import com.harrypotter.features.characters.main.data.datasource.api.CharactersApi
+import com.harrypotter.features.characters.main.data.datasource.api.CharactersApiDatasource
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
