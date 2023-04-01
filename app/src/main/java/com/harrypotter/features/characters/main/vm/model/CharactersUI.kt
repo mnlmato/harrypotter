@@ -4,7 +4,6 @@ import java.io.Serializable
 
 data class CharactersListUI(val list: Map<String, List<CharacterUI>>)
 
-// TODO Usar parcelable
 data class CharacterUI(
     val name: String,
     val house: String,
