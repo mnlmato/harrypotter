@@ -1,6 +1,7 @@
 package com.harrypotter.features.characters.main.ui.design
 
 import android.annotation.SuppressLint
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -57,7 +59,10 @@ fun CharactersScreen(
 fun ToolbarCharacters() {
     TopAppBar(
         title = {
-            Text(text = stringResource(id = R.string.app_name))
+            Text(
+                text = stringResource(id = R.string.app_name),
+                modifier = Modifier.testTag(CHARACTERS_SCREEN_TOOLBAR_TEST_TAG),
+            )
         },
     )
 }
@@ -69,12 +74,18 @@ fun CharactersList(
     modifier: Modifier,
     onCharacterItemListener: OnCharacterItemListener,
 ) {
-    LazyColumn(modifier = modifier.fillMaxWidth()) {
+    LazyColumn(
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag(CHARACTERS_SCREEN_LIST_TEST_TAG),
+    ) {
         charactersList.list.forEach { (headerHouse, characters) ->
             stickyHeader {
                 StickyHeader(
                     title = headerHouse,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable(enabled = false) {},
                 )
             }
 
@@ -172,3 +183,9 @@ fun CharacterDetailScreenPreview() {
 }
 
 private const val MAX_LINES = 1
+
+@VisibleForTesting
+const val CHARACTERS_SCREEN_TOOLBAR_TEST_TAG = "CHARACTERS_SCREEN_TOOLBAR_TEST_TAG"
+
+@VisibleForTesting
+const val CHARACTERS_SCREEN_LIST_TEST_TAG = "CHARACTERS_SCREEN_LIST_TEST_TAG"

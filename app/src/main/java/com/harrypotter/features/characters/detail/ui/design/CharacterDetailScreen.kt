@@ -1,6 +1,7 @@
 package com.harrypotter.features.characters.detail.ui.design
 
 import android.annotation.SuppressLint
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -40,7 +42,10 @@ fun CharacterDetailScreen(
 fun ToolbarCharacterDetail(onBackButtonClicked: () -> Unit) {
     TopAppBar(
         title = {
-            Text(text = stringResource(id = R.string.detail_screen_title))
+            Text(
+                text = stringResource(id = R.string.detail_screen_title),
+                modifier = Modifier.testTag(CHARACTER_DETAIL_SCREEN_TOOLBAR_TEST_TAG),
+            )
         },
         navigationIcon = {
             IconButton(onClick = { onBackButtonClicked() }) {
@@ -67,43 +72,59 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
         CharacterDetailText(
             text = characterUI.name,
             style = CustomThemeResources.typography.headlineMedium,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(CHARACTER_DETAIL_SCREEN_NAME_TEST_TAG),
         )
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
             text = characterUI.house,
             style = CustomThemeResources.typography.headlineSmall,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(CHARACTER_DETAIL_SCREEN_HOUSE_TEST_TAG),
         )
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
             text = characterUI.actorName,
             style = CustomThemeResources.typography.bodyLarge,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(CHARACTER_DETAIL_SCREEN_ACTOR_NAME_TEST_TAG),
         )
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
             text = characterUI.gender,
             style = CustomThemeResources.typography.bodyLarge,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(CHARACTER_DETAIL_SCREEN_GENDER_TEST_TAG),
         )
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
             text = characterUI.species,
             style = CustomThemeResources.typography.bodyLarge,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(CHARACTER_DETAIL_SCREEN_SPECIES_TEST_TAG),
         )
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
             text = characterUI.birth,
             style = CustomThemeResources.typography.bodyLarge,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag(CHARACTER_DETAIL_SCREEN_BIRTHDAY_TEST_TAG),
         )
     }
 }
 
 @Composable
-fun CharacterDetailText(text: String, style: TextStyle, modifier: Modifier) {
+fun CharacterDetailText(
+    text: String,
+    style: TextStyle,
+    modifier: Modifier,
+) {
     Text(
         text = text,
         maxLines = MAX_LINES,
@@ -132,3 +153,25 @@ fun CharacterDetailScreenPreview() {
 }
 
 private const val MAX_LINES = 1
+
+@VisibleForTesting
+const val CHARACTER_DETAIL_SCREEN_TOOLBAR_TEST_TAG = "CHARACTER_DETAIL_SCREEN_TOOLBAR_TEST_TAG"
+
+@VisibleForTesting
+const val CHARACTER_DETAIL_SCREEN_NAME_TEST_TAG = "CHARACTER_DETAIL_SCREEN_NAME_TEST_TAG"
+
+@VisibleForTesting
+const val CHARACTER_DETAIL_SCREEN_HOUSE_TEST_TAG = "CHARACTER_DETAIL_SCREEN_HOUSE_TEST_TAG"
+
+@VisibleForTesting
+const val CHARACTER_DETAIL_SCREEN_ACTOR_NAME_TEST_TAG =
+    "CHARACTER_DETAIL_SCREEN_ACTOR_NAME_TEST_TAG"
+
+@VisibleForTesting
+const val CHARACTER_DETAIL_SCREEN_GENDER_TEST_TAG = "CHARACTER_DETAIL_SCREEN_GENDER_TEST_TAG"
+
+@VisibleForTesting
+const val CHARACTER_DETAIL_SCREEN_SPECIES_TEST_TAG = "CHARACTER_DETAIL_SCREEN_SPECIES_TEST_TAG"
+
+@VisibleForTesting
+const val CHARACTER_DETAIL_SCREEN_BIRTHDAY_TEST_TAG = "CHARACTER_DETAIL_SCREEN_BIRTHDAY_TEST_TAG"
