@@ -23,9 +23,10 @@ class CharactersViewModel @Inject constructor(
     private val coroutinesDispatchers: CoroutinesDispatchers
 ) : ViewModel() {
 
-    val showDetailEvent = SingleLiveData<CharacterUI>()
+    val showDetailEvent = SingleLiveData<String>()
 
-    private val charactersStateMutableEvent = MutableLiveData<CharactersState>(CharactersState.Loading)
+    private val charactersStateMutableEvent =
+        MutableLiveData<CharactersState>(CharactersState.Loading)
     val charactersStateEvent: LiveData<CharactersState>
         get() = charactersStateMutableEvent
 
@@ -52,6 +53,6 @@ class CharactersViewModel @Inject constructor(
     }
 
     fun onItemClick(character: CharacterUI) {
-        showDetailEvent.value = character
+        showDetailEvent.value = character.id
     }
 }

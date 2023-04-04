@@ -3,6 +3,7 @@ package com.harrypotter.features.characters.main.domain.model
 data class Characters(val list: List<Character>)
 
 data class Character(
+    val id: String,
     val name: String,
     val house: HouseType,
     val imageUrl: String,

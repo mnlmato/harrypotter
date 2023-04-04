@@ -10,7 +10,6 @@ import com.harrypotter.features.characters.detail.ui.CharacterDetailActivity
 import com.harrypotter.features.characters.main.ui.design.CharactersScreen
 import com.harrypotter.features.characters.main.ui.design.OnCharacterItemListener
 import com.harrypotter.features.characters.main.vm.CharactersViewModel
-import com.harrypotter.features.characters.main.vm.model.CharacterUI
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,7 +48,7 @@ class CharactersActivity : AppCompatActivity() {
         viewModel.showDetailEvent.observe(this@CharactersActivity, ::showDetail)
     }
 
-    private fun showDetail(character: CharacterUI) {
-        CharacterDetailActivity.navigate(this, character)
+    private fun showDetail(characterId: String) {
+        CharacterDetailActivity.navigate(this, characterId)
     }
 }
