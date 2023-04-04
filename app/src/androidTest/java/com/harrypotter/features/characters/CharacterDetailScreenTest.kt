@@ -56,6 +56,7 @@ class CharacterDetailScreenTest {
         charactersPage.charactersList.performItemClickAtPosition(0)
 
         val expectedData = CharacterUI(
+            id = "",
             name = "Harry Potter",
             house = "Gryffindor",
             imageUrl = "http://hp-api.herokuapp.com/images/harry.jpg",

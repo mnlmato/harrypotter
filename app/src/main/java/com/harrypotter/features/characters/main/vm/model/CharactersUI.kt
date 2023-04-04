@@ -5,6 +5,7 @@ import java.io.Serializable
 data class CharactersListUI(val list: Map<String, List<CharacterUI>>)
 
 data class CharacterUI(
+    val id: String,
     val name: String,
     val house: String,
     val imageUrl: String,

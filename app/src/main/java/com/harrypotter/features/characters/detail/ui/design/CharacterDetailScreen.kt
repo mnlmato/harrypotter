@@ -140,6 +140,7 @@ fun CharacterDetailText(
 fun CharacterDetailScreenPreview() {
     CharacterDetailScreen(
         characterUI = CharacterUI(
+            id = "1",
             name = "Harry Potter",
             house = "Gryffindor",
             imageUrl = "http://hp-api.herokuapp.com/images/harry.jpg",

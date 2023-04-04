@@ -161,6 +161,7 @@ fun CharacterItemRow(
 fun CharacterDetailScreenPreview() {
     val successData = listOf(
         CharacterUI(
+            id = "1",
             name = "Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter",
             house = "Gryffindor",
             imageUrl = "http://hp-api.herokuapp.com/images/harry.jpg",
@@ -170,6 +171,7 @@ fun CharacterDetailScreenPreview() {
             birth = "31-07-1980",
         ),
         CharacterUI(
+            id = "1",
             name = "Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter",
             house = "Gryffindor",
             imageUrl = "http://hp-api.herokuapp.com/images/harry.jpg",
