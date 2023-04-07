@@ -1,6 +1,5 @@
 package com.harrypotter.features.characters.main.ui.design
 
-import android.annotation.SuppressLint
 import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -31,7 +30,6 @@ import com.harrypotter.features.characters.main.vm.model.CharacterUI
 import com.harrypotter.features.characters.main.vm.model.CharactersListUI
 import com.harrypotter.features.characters.main.vm.model.CharactersState
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharactersScreen(
@@ -43,13 +41,19 @@ fun CharactersScreen(
         topBar = { ToolbarCharacters() },
     ) {
         when (charactersState) {
-            is CharactersState.Loading -> LoadingCustom()
-            is CharactersState.Error -> GenericErrorScreen(onRetryButtonClickListener)
-            is CharactersState.Success -> CharactersList(
-                charactersList = charactersState.characters,
-                modifier = Modifier.padding(paddingValues = it),
-                onCharacterItemListener = onCharacterItemListener,
-            )
+            is CharactersState.Loading -> {
+                LoadingCustom(Modifier.fillMaxSize())
+            }
+            is CharactersState.Error -> {
+                GenericErrorScreen(onRetryButtonClickListener = onRetryButtonClickListener)
+            }
+            is CharactersState.Success -> {
+                CharactersList(
+                    charactersList = charactersState.characters,
+                    modifier = Modifier.padding(paddingValues = it),
+                    onCharacterItemListener = onCharacterItemListener,
+                )
+            }
         }
     }
 }

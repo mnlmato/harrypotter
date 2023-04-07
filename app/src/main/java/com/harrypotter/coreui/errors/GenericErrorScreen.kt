@@ -14,11 +14,14 @@ import androidx.compose.ui.unit.dp
 import com.harrypotter.R
 
 @Composable
-fun GenericErrorScreen(onRetryButtonClickListener: OnRetryButtonClickListener) {
+fun GenericErrorScreen(
+    modifier: Modifier = Modifier,
+    onRetryButtonClickListener: OnRetryButtonClickListener,
+) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
     ) {
         Text(
             text = stringResource(id = R.string.generic_error_title),
