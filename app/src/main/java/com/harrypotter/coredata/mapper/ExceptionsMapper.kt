@@ -7,8 +7,8 @@ import java.net.UnknownHostException
 
 fun Exception.toCustomException(): Exception {
     return when (this) {
-        is IOException -> this.toNetworkException()
         is UnknownHostException -> this.toNetworkException()
+        is IOException -> this.toNetworkException()
         else -> this.toGenericException()
     }
 }
