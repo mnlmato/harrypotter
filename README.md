@@ -10,6 +10,10 @@ The ViewModel is using LiveData and Coroutines.
 The Data Layer is using Retrofit and Gson.
 The Dependency Injection is implemented with Hilt.
 
+## Video demo
+
+![Alt Text](https://bitbucket.org/ManuelMato/harrypotter/raw/a12b60b8de815dedb1d8e949a7c0104a4945dc34/app_demo.gif)
+
 ## Project structure
 
 The project follows a modular architecture, separating different concerns into their own modules. The modules are as follows:
