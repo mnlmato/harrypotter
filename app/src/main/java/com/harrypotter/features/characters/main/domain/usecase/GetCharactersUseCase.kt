@@ -6,7 +6,7 @@ import com.harrypotter.features.characters.main.domain.model.Characters
 import javax.inject.Inject
 
 class GetCharactersUseCase @Inject constructor(
-    private val charactersRepository: CharactersRepository
+    private val charactersRepository: CharactersRepository,
 ) {
     suspend operator fun invoke(): DataResult<Characters> {
         val charactersResult = charactersRepository.getCharacters()
