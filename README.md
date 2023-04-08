@@ -1,14 +1,16 @@
 # Android Kotlin Project with MVVM
 
 This is a sample project written in Kotlin using MVVM, Use Case and the Repository Pattern. The project includes the following test:
-- Unit Test with JUnit, MockK and Kotest
-- Integration Test with MockWebServer
-- Instrumented Test  using the Page Object Pattern
 
-The UI is built with Jetpack Compose, Glide, Animations, Material3 and it supports Dark Mode.
-The ViewModel is using LiveData and Coroutines.
-The Data Layer is using Retrofit and Gson.
-The Dependency Injection is implemented with Hilt.
+-  Unit Test with JUnit, MockK and Kotest
+-  Integration Test with MockWebServer
+-  Instrumented Test  using the Page Object Pattern
+
+
+The UI is built with Jetpack Compose, Glide, Animations, Material3 and it supports Dark Mode.  
+The ViewModel is using LiveData and Coroutines.  
+The Data Layer is using Retrofit and Gson
+and the Dependency Injection is implemented with Hilt.
 
 ## Video demo
 
@@ -21,14 +23,16 @@ The project follows a modular architecture, separating different concerns into t
 - **app:** The main application module.
 - **core-app:** The core module responsible for containing the result model and custom exceptions.
 - **core-data:** The core data module is responsible for injecting the REST module, the URL provider, and the exceptions mapper.
-- **core-ui:** The core UI module is responsible for providing common composable functions, an image loader, a resource provider loader, and ViewModel extensions.
+- **core-ui:** The core UI module is responsible for providing common composable functions, an image loader, a resource provider loader and ViewModel extensions.
 - **design-system:** The design system module is responsible for providing the application theme and base widget components.
 - **features:** The features module is responsible for providing the different features in the app.
 
 ## Testing
 
 The project has a comprehensive suite of tests:
+
 - Unit test: ViewModel, Use Cases, Repository and Api datasource
+
 - Integration test from ui: Check the flow in the main screen and the data in the second screen.
 
 ## Libraries used
