@@ -84,6 +84,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
             isVisible = isPossibleStartCascadeAnimation,
+            enterTransitionTime = 333,
             text = characterUI.name,
             style = CustomThemeResources.typography.headlineMedium,
             modifier = Modifier
