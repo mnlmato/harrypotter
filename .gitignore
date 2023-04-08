@@ -19,3 +19,4 @@ local.properties
 /.idea/codeStyles/codeStyleConfig.xml
 /.idea/compiler.xml
 /.idea/gradle.xml
+/app/build
