@@ -6,9 +6,7 @@ import com.harrypotter.features.characters.commons.data.datasource.api.model.Cha
 import java.lang.Exception
 import javax.inject.Inject
 
-class CharactersApiDatasource @Inject constructor(
-    private val charactersApi: CharactersApi
-) {
+class CharactersApiDatasource @Inject constructor(private val charactersApi: CharactersApi) {
     suspend fun getCharacters(): DataResult<List<CharacterResponse>> {
         return try {
             val characters = charactersApi.getCharacters()

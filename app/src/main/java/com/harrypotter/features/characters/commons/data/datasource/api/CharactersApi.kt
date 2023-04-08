@@ -1,6 +1,5 @@
 package com.harrypotter.features.characters.commons.data.datasource.api
 
-import androidx.annotation.VisibleForTesting
 import com.harrypotter.features.characters.commons.data.datasource.api.model.CharacterResponse
 import retrofit2.http.GET
 
@@ -10,5 +9,4 @@ interface CharactersApi {
     suspend fun getCharacters(): List<CharacterResponse>
 }
 
-@VisibleForTesting
-const val CHARACTERS_ENDPOINT = "characters"
+private const val CHARACTERS_ENDPOINT = "characters"

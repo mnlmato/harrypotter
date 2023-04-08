@@ -49,7 +49,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     private fun getCharacterId() = intent.extras?.getString(ARG_CHARACTER)
-        ?: throw IllegalArgumentException("CharacterUI is mandatory")
+        ?: throw IllegalArgumentException("Character id is mandatory")
 }
 
 private const val ARG_CHARACTER = "ARG_CHARACTER"
