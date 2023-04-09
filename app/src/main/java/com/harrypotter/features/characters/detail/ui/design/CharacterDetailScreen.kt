@@ -2,10 +2,9 @@ package com.harrypotter.features.characters.detail.ui.design
 
 import android.annotation.SuppressLint
 import androidx.annotation.VisibleForTesting
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -19,8 +18,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -84,7 +83,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
             isVisible = isPossibleStartCascadeAnimation,
-            enterTransitionTime = 333,
+            animationTime = 333,
             text = characterUI.name,
             style = CustomThemeResources.typography.headlineMedium,
             modifier = Modifier
@@ -95,7 +94,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
             isVisible = isPossibleStartCascadeAnimation,
-            enterTransitionTime = 1_000,
+            animationTime = 1_000,
             text = characterUI.house,
             style = CustomThemeResources.typography.headlineSmall,
             modifier = Modifier
@@ -105,7 +104,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
             isVisible = isPossibleStartCascadeAnimation,
-            enterTransitionTime = 1_500,
+            animationTime = 1_500,
             text = characterUI.actorName,
             style = CustomThemeResources.typography.bodyLarge,
             modifier = Modifier
@@ -115,7 +114,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
             isVisible = isPossibleStartCascadeAnimation,
-            enterTransitionTime = 2_000,
+            animationTime = 2_000,
             text = characterUI.gender,
             style = CustomThemeResources.typography.bodyLarge,
             modifier = Modifier
@@ -125,7 +124,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
             isVisible = isPossibleStartCascadeAnimation,
-            enterTransitionTime = 2_500,
+            animationTime = 2_500,
             text = characterUI.species,
             style = CustomThemeResources.typography.bodyLarge,
             modifier = Modifier
@@ -135,7 +134,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
             isVisible = isPossibleStartCascadeAnimation,
-            enterTransitionTime = 3_000,
+            animationTime = 3_000,
             text = characterUI.birth,
             style = CustomThemeResources.typography.bodyLarge,
             modifier = Modifier
@@ -170,33 +169,23 @@ fun AvatarDetail(imageUrl: String, isAvatarLoaded: () -> Unit) {
 @Composable
 fun CharacterDetailText(
     isVisible: Boolean = false,
-    enterTransitionTime: Int = 0,
+    animationTime: Int = 0,
     text: String,
     style: TextStyle,
     modifier: Modifier,
 ) {
-    AnimatedVisibility(
-        visible = isVisible,
-        enter = fadeIn(animationSpec = tween(enterTransitionTime)),
-    ) {
-        Text(
-            text = text,
-            maxLines = MAX_LINES,
-            overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Center,
-            style = style,
-            modifier = modifier,
-        )
-    }
-
-    // Invisible skeleton to get the animation result
-    if (!isVisible) {
-        Text(
-            text = text,
-            color = Color.Transparent,
-            style = style,
-        )
-    }
+    val alphaValue: Float by animateFloatAsState(
+        targetValue = if (isVisible) 1f else 0f,
+        animationSpec = tween(animationTime)
+    )
+    Text(
+        text = text,
+        maxLines = MAX_LINES,
+        overflow = TextOverflow.Ellipsis,
+        textAlign = TextAlign.Center,
+        style = style,
+        modifier = modifier.alpha(alphaValue),
+    )
 }
 
 @Composable
