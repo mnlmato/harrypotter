@@ -2,7 +2,15 @@
 
 This is a sample project written in Kotlin using MVVM, Use Case and the Repository Pattern. 
 
-![architecture_uml](https://bitbucket.org/ManuelMato/harrypotter/raw/8700b4766e353c1d79bcdc1aa2950090fde971b2/mvvm_demo_app.png)
+![architecture_uml](https://github.com/mnlmato/harrypotter/blob/main/mvvm_demo_app.png)
+
+- The UI is built with Jetpack Compose, Glide, Animations, Material3 and it supports Dark Mode
+- The ViewModel is using LiveData and Coroutines
+- The Data Layer is using Retrofit and Gson
+- The Dependency Injection is implemented with Hilt
+- The errors are caught and displayed on a screen with a retry button
+- Additionally, the detail screen uses an ID to fetch data from a cache data source
+
 
 The project includes the following test:
 
@@ -10,26 +18,20 @@ The project includes the following test:
 -  Integration Test with MockWebServer
 -  Instrumented Test  using the Page Object Pattern
 
-
-The UI is built with Jetpack Compose, Glide, Animations, Material3 and it supports Dark Mode.  
-The ViewModel is using LiveData and Coroutines.  
-The Data Layer is using Retrofit and Gson
-and the Dependency Injection is implemented with Hilt.
-
 ## Video demo
 
-![Alt Text](https://bitbucket.org/ManuelMato/harrypotter/raw/a12b60b8de815dedb1d8e949a7c0104a4945dc34/app_demo.gif)
+![Alt Text](https://github.com/mnlmato/harrypotter/blob/main/app_demo.gif)
 
 ## Project structure
 
-The project follows a modular architecture, separating different concerns into their own modules. The modules are as follows:
+The project follows a modular architecture approach, with a goal of separating different concerns into their own packages. Although the current implementation is not a true modularization, the code has been organized in a way that facilitates future modularization if desired. By separating concerns into modules, the codebase can be maintained more easily and improved independently. This leads to a more scalable and maintainable app, which can evolve over time as new features are added and requirements change.
 
-- **app:** The main application module.
-- **core-app:** The core module responsible for containing the result model and custom exceptions.
-- **core-data:** The core data module is responsible for injecting the REST module, the URL provider, and the exceptions mapper.
-- **core-ui:** The core UI module is responsible for providing common composable functions, an image loader, a resource provider loader and ViewModel extensions.
-- **design-system:** The design system module is responsible for providing the application theme and base widget components.
-- **features:** The features module is responsible for providing the different features in the app.
+- **app:** The main application module
+- **core-app:** The core module responsible for containing the result model and custom exceptions
+- **core-data:** The core data module is responsible for injecting the REST module, the URL provider, and the exceptions mapper
+- **core-ui:** The core UI module is responsible for providing common composable functions, an image loader, a resource provider loader and ViewModel extensions
+- **design-system:** The design system module is responsible for providing the application theme and base widget components
+- **features:** The features module is responsible for providing the different features in the app
 
 ## Testing
 
