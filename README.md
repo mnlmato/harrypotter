@@ -1,6 +1,10 @@
 # Android Kotlin Project with MVVM
 
-This is a sample project written in Kotlin using MVVM, Use Case and the Repository Pattern. The project includes the following test:
+This is a sample project written in Kotlin using MVVM, Use Case and the Repository Pattern. 
+
+![architecture_uml](https://bitbucket.org/ManuelMato/harrypotter/raw/8700b4766e353c1d79bcdc1aa2950090fde971b2/mvvm_demo_app.png)
+
+The project includes the following test:
 
 -  Unit Test with JUnit, MockK and Kotest
 -  Integration Test with MockWebServer
