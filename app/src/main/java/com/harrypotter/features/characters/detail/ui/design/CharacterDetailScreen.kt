@@ -76,7 +76,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
         var isPossibleStartCascadeAnimation by rememberSaveable { mutableStateOf(false) }
         AvatarDetail(
             characterUI.imageUrl,
-            isAvatarLoaded = {
+            onAvatarAnimationFinished = {
                 isPossibleStartCascadeAnimation = true
             },
         )
@@ -145,12 +145,12 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
 }
 
 @Composable
-fun AvatarDetail(imageUrl: String, isAvatarLoaded: () -> Unit) {
+fun AvatarDetail(imageUrl: String, onAvatarAnimationFinished: () -> Unit) {
     var avatarSmallSize by rememberSaveable { mutableStateOf(true) }
     val avatarSize by animateDpAsState(
         targetValue = if (avatarSmallSize) Dimens.dimen48 else Dimens.dimen200,
         animationSpec = tween(666),
-        finishedListener = { isAvatarLoaded() },
+        finishedListener = { onAvatarAnimationFinished() },
     )
 
     NetworkImageDrawable(url = imageUrl) { drawable ->

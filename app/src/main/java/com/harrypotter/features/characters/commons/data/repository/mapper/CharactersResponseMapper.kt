@@ -19,6 +19,6 @@ fun CharacterResponse.toCharacter(): Character {
         actorName = actorName,
         gender = GenderValueResponseMapper.toType(gender),
         species = SpeciesValueResponseMapper.toType(species),
-        birth = birth ?: ""
+        birth = birth.orEmpty(),
     )
 }

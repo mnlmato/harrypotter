@@ -27,15 +27,6 @@ class SingleLiveData<T> : MutableLiveData<T>() {
         pending.set(true)
         super.setValue(t)
     }
-
-    /**
-     * Used for cases where T is Void, to make calls cleaner.
-     */
-    fun call() {
-        value = null
-    }
-
-    companion object {
-        private const val TAG = "SingleLiveEvent"
-    }
 }
+
+private const val TAG = "SingleLiveEvent"

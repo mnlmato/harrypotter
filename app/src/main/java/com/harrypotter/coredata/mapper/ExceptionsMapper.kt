@@ -13,6 +13,6 @@ fun Exception.toCustomException(): Exception {
     }
 }
 
-private fun IOException.toNetworkException() = NetworkException(this.message ?: "")
-private fun UnknownHostException.toNetworkException() = NetworkException(this.message ?: "")
-private fun Exception.toGenericException() = GenericException(this.message ?: "")
+private fun IOException.toNetworkException() = NetworkException(this.message.orEmpty())
+private fun UnknownHostException.toNetworkException() = NetworkException(this.message.orEmpty())
+private fun Exception.toGenericException() = GenericException(this.message.orEmpty())
