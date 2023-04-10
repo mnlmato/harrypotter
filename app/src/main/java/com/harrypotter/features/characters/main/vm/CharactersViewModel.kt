@@ -13,7 +13,6 @@ import com.harrypotter.features.characters.main.vm.model.CharacterUI
 import com.harrypotter.features.characters.main.vm.model.CharactersState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,19 +35,17 @@ class CharactersViewModel @Inject constructor(
 
     fun loadCharacters() {
         charactersStateMutableEvent.value = CharactersState.Loading
-        viewModelScope.launch(coroutinesDispatchers.immediate) {
-            withContext(coroutinesDispatchers.io) {
-                getCharactersUseCase().fold(
-                    onSuccess = {
-                        val charactersListUI = it.toCharactersUI(resourceProvider)
-                        val successState = CharactersState.Success(charactersListUI)
-                        charactersStateMutableEvent.postValue(successState)
-                    },
-                    onError = {
-                        charactersStateMutableEvent.postValue(CharactersState.Error)
-                    }
-                )
-            }
+        viewModelScope.launch(coroutinesDispatchers.io) {
+            getCharactersUseCase().fold(
+                onSuccess = {
+                    val charactersListUI = it.toCharactersUI(resourceProvider)
+                    val successState = CharactersState.Success(charactersListUI)
+                    charactersStateMutableEvent.postValue(successState)
+                },
+                onError = {
+                    charactersStateMutableEvent.postValue(CharactersState.Error)
+                }
+            )
         }
     }
 
