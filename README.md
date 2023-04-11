@@ -61,7 +61,7 @@ The following libraries are used in this project:
 
 MIT License
 
-Copyright (c) [2023] [Manuel Mato Marinño]
+Copyright (c) [2023] [Manuel Mato Mariño]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
