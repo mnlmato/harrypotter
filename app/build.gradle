@@ -6,11 +6,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
+    namespace 'com.harrypotter'
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.harrypotter"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
@@ -25,12 +26,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_17
     }
 
     buildFeatures {
@@ -86,9 +88,9 @@ android {
         androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.2.1'
         androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
 
-          // Test rules and transitive dependencies:
+        // Test rules and transitive dependencies:
         androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.4.0'
-          // Needed for createAndroidComposeRule, but not createComposeRule:
+        // Needed for createAndroidComposeRule, but not createComposeRule:
         debugImplementation 'androidx.compose.ui:ui-test-manifest:1.4.0'
         debugImplementation 'androidx.test:monitor:1.6.1'
 
