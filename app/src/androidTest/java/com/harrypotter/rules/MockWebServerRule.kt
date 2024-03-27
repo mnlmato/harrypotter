@@ -10,7 +10,7 @@ class MockWebServerRule : TestRule {
 
     val mockWebServer = MockWebServer()
 
-    override fun apply(base: Statement, description: Description?) = object : Statement() {
+    override fun apply(base: Statement, description: Description) = object : Statement() {
         override fun evaluate() {
             mockWebServer.start(PORT_LOCALHOST)
             try {
