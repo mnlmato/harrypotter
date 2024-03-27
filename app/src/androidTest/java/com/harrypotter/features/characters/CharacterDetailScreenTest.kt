@@ -10,7 +10,7 @@ import com.harrypotter.features.characters.main.vm.model.CharacterUI
 import com.harrypotter.features.characters.pages.CharacterDetailPage
 import com.harrypotter.features.characters.pages.CharactersPage
 import com.harrypotter.rules.MockWebServerRule
-import com.harrypotter.testdependencies.mockwebserver.getCharactersSuccessResponse
+import com.harrypotter.testdependencies.mockwebserver.CharactersMockResponseProvider
 import com.jakewharton.espresso.OkHttp3IdlingResource
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -51,7 +51,9 @@ class CharacterDetailScreenTest {
 
     @Test
     fun whenDetailScreenIsLoadedThenShowTheRightData() {
-        mockWebServerRule.mockWebServer.apply { enqueue(getCharactersSuccessResponse()) }
+        val charactersSuccessMockResponse =
+            CharactersMockResponseProvider.provideSuccessCharactersList()
+        mockWebServerRule.mockWebServer.apply { enqueue(charactersSuccessMockResponse) }
 
         charactersPage.charactersList.performItemClickAtPosition(0)
 

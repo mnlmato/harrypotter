@@ -2,11 +2,14 @@ package com.harrypotter.features.characters.commons.data.repository
 
 import com.harrypotter.coreapp.DataResult
 import com.harrypotter.coreapp.exceptions.GenericException
+import com.harrypotter.coreapp.exceptions.UnavailableServerException
 import com.harrypotter.features.characters.commons.data.datasource.api.CharactersApiDatasource
 import com.harrypotter.features.characters.commons.data.datasource.api.CharactersFakeApiGenerator
 import com.harrypotter.features.characters.commons.data.datasource.api.model.CharacterResponse
 import com.harrypotter.features.characters.commons.data.datasource.cache.CharactersCacheDatasource
+import com.harrypotter.features.characters.commons.data.datasource.local.CharactersLocalDatasource
 import com.harrypotter.features.characters.main.domain.model.Character
+import com.harrypotter.features.characters.main.domain.model.Characters
 import com.harrypotter.features.characters.main.domain.model.GenderType
 import com.harrypotter.features.characters.main.domain.model.HouseType
 import com.harrypotter.features.characters.main.domain.model.SpeciesType
@@ -23,6 +26,7 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
 
     private val mockCharactersApiDataSource = mockk<CharactersApiDatasource>()
     private val mockCharactersCacheDatasource = mockk<CharactersCacheDatasource>()
+    private val mockCharactersLocalDatasource = mockk<CharactersLocalDatasource>()
     private lateinit var subject: CharactersRepositoryImpl
 
     @Before
@@ -30,6 +34,7 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
         subject = CharactersRepositoryImpl(
             mockCharactersApiDataSource,
             mockCharactersCacheDatasource,
+            mockCharactersLocalDatasource,
         )
     }
 
@@ -42,8 +47,8 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
 
         val realResult = runBlocking { subject.getCharacters() }
 
-        val expectedResult = DataResult.Success(getCharactersExpected())
-        Assert.assertEquals(expectedResult::class, realResult::class)
+        val expectedResult = DataResult.Success(Characters(list = getCharactersExpected()))
+        Assert.assertEquals(expectedResult, realResult)
     }
 
     @Test
@@ -58,6 +63,34 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
         verify {
             mockCharactersCacheDatasource.save(getCharactersResponseFake())
         }
+    }
+
+    @Test
+    fun `GIVEN an UnavailableServerException response WHEN getCharacters THEN should returns the local data`() {
+        coEvery { mockCharactersApiDataSource.getCharacters() } returns DataResult.Error(
+            UnavailableServerException("")
+        )
+        every { mockCharactersLocalDatasource.getCharacters() } returns getCharactersResponseFake()
+        every { mockCharactersCacheDatasource.save(any()) } returns Unit
+
+        val realResult = runBlocking { subject.getCharacters() }
+
+        val expectedResult = DataResult.Success(Characters(list = getCharactersExpected()))
+        Assert.assertEquals(expectedResult, realResult)
+    }
+
+    @Test
+    fun `GIVEN an UnavailableServerException response and empty local list WHEN getCharacters THEN should returns the UnavailableServerException api error`() {
+        coEvery { mockCharactersApiDataSource.getCharacters() } returns DataResult.Error(
+            UnavailableServerException("")
+        )
+        every { mockCharactersLocalDatasource.getCharacters() } returns emptyList()
+        every { mockCharactersCacheDatasource.save(any()) } returns Unit
+
+        val realResult = runBlocking { subject.getCharacters() }
+
+        val expectedResult = DataResult.Error(UnavailableServerException(""))
+        Assert.assertEquals(expectedResult, realResult)
     }
 
     @Test

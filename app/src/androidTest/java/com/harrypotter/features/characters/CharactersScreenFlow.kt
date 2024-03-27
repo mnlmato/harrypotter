@@ -10,9 +10,8 @@ import com.harrypotter.features.characters.main.ui.CharactersActivity
 import com.harrypotter.features.characters.pages.CharacterDetailPage
 import com.harrypotter.features.characters.pages.CharactersPage
 import com.harrypotter.rules.MockWebServerRule
+import com.harrypotter.testdependencies.mockwebserver.CharactersMockResponseProvider
 import com.harrypotter.testdependencies.mockwebserver.HttpCodeType
-import com.harrypotter.testdependencies.mockwebserver.getCharactersSuccessResponse
-import com.harrypotter.testdependencies.mockwebserver.getError
 import com.jakewharton.espresso.OkHttp3IdlingResource
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -63,7 +62,9 @@ class CharactersScreenFlow {
 
     @Test
     fun givenSuccessResponseWhenClickOnItemCharactersDetailIsShowed() {
-        mockWebServerRule.mockWebServer.apply { enqueue(getCharactersSuccessResponse()) }
+        val charactersSuccessMockResponse =
+            CharactersMockResponseProvider.provideSuccessCharactersList()
+        mockWebServerRule.mockWebServer.apply { enqueue(charactersSuccessMockResponse) }
 
         charactersPage.charactersList.performItemClickAtPosition(0, true)
 
@@ -72,17 +73,22 @@ class CharactersScreenFlow {
 
     @Test
     fun givenErrorScreenWhenClickRetryButtonAndNoErrorsThenShowSuccessScreen() {
-        mockWebServerRule.mockWebServer.apply { enqueue(getError(HttpCodeType.ERROR_404)) }
+        val errorMockResponse = CharactersMockResponseProvider.provideError(HttpCodeType.ERROR_404)
+        mockWebServerRule.mockWebServer.apply { enqueue(errorMockResponse) }
 
         genericErrorPage.clickOnRetryButton()
-        mockWebServerRule.mockWebServer.apply { enqueue(getCharactersSuccessResponse()) }
+
+        val charactersSuccessMockResponse =
+            CharactersMockResponseProvider.provideSuccessCharactersList()
+        mockWebServerRule.mockWebServer.apply { enqueue(charactersSuccessMockResponse) }
 
         charactersPage.charactersList.isDisplayed(true)
     }
 
     @Test
     fun givenErrorResponseWhenLoadScreenThenShowGenericErrorScreen() {
-        mockWebServerRule.mockWebServer.apply { enqueue(getError(HttpCodeType.ERROR_404)) }
+        val errorMockResponse = CharactersMockResponseProvider.provideError(HttpCodeType.ERROR_404)
+        mockWebServerRule.mockWebServer.apply { enqueue(errorMockResponse) }
 
         genericErrorPage.isScreenDisplayed()
     }
