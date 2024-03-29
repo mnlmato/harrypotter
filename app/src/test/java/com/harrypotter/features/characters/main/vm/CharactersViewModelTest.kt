@@ -13,8 +13,11 @@ import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import org.junit.*
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import org.junit.Assert
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class CharactersViewModelTest : CharactersFakeVMGenerator {
@@ -22,7 +25,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private val testCoroutineDispatcher = TestCoroutineDispatcher()
+    private val testCoroutineDispatcher = UnconfinedTestDispatcher()
     private val getCharactersUseCase: GetCharactersUseCase = mockk()
     private val resourceProvider: ResourceProvider = mockk()
     private val coroutinesDispatchers = CoroutinesDispatchersTestImpl(testCoroutineDispatcher)
@@ -35,11 +38,6 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
             resourceProvider,
             coroutinesDispatchers
         )
-    }
-
-    @After
-    fun tearDown() {
-        testCoroutineDispatcher.cleanupTestCoroutines()
     }
 
     @Test
@@ -87,7 +85,6 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
     fun `GIVEN a result WHEN loadCharacters THEN show loading before response`() {
         coEvery { getCharactersUseCase() } returns DataResult.Success(getCharactersFake())
 
-        testCoroutineDispatcher.pauseDispatcher()
         subject.loadCharacters()
 
         val isLoadingShowedBeforeResponseExpected = CharactersState.Loading

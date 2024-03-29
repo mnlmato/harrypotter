@@ -38,7 +38,7 @@ class CharacterDetailActivity : AppCompatActivity() {
             CustomTheme {
                 CharacterDetailScreen(
                     characterUI = viewModel.characterEvent.collect(),
-                    onBackButtonClicked = { viewModel.onBackClicked() }
+                    onBackButtonClicked = { viewModel.onBackClicked() },
                 )
             }
         }

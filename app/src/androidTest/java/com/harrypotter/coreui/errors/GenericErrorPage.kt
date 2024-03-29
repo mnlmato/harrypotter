@@ -1,20 +1,18 @@
 package com.harrypotter.coreui.errors
 
-import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.ComposeTestRule
-import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.performClick
+import com.harrypotter.viewinteraction.ViewInteractionTest
 
 class GenericErrorPage(composeTestRule: ComposeTestRule) {
 
-    private val genericErrorTextView = composeTestRule.onNodeWithTag(GENERIC_ERROR_TEXT_TAG)
-    private val genericErrorButton = composeTestRule.onNodeWithTag(GENERIC_ERROR_BUTTON_TAG)
+    private val genericErrorTextView = ViewInteractionTest(composeTestRule, GenericErrorScreenTag.TEXT.value)
+    private val genericErrorButton = ViewInteractionTest(composeTestRule, GenericErrorScreenTag.BUTTON.value)
 
     fun isScreenDisplayed() {
-        genericErrorTextView.assertIsDisplayed()
+        genericErrorTextView.isDisplayed(waitForView = true)
     }
 
     fun clickOnRetryButton() {
-        genericErrorButton.performClick()
+        genericErrorButton.performClick(waitForView = true)
     }
 }

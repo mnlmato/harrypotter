@@ -55,7 +55,7 @@ class CharacterDetailScreenTest {
             CharactersMockResponseProvider.provideSuccessCharactersList()
         mockWebServerRule.mockWebServer.apply { enqueue(charactersSuccessMockResponse) }
 
-        charactersPage.charactersList.performItemClickAtPosition(0)
+        charactersPage.charactersList.performItemClickAtPosition(position = 0, waitForView = true)
 
         val expectedData = CharacterUI(
             id = "",

@@ -1,16 +1,25 @@
 package com.harrypotter.features.characters.detail.ui.design
 
 import android.annotation.SuppressLint
-import androidx.annotation.VisibleForTesting
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.*
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,7 +44,6 @@ import com.harrypotter.designsystem.theme.Dimens
 import com.harrypotter.features.characters.main.vm.model.CharacterUI
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharacterDetailScreen(
     characterUI: CharacterUI,
@@ -55,12 +63,12 @@ fun ToolbarCharacterDetail(onBackButtonClicked: () -> Unit) {
         title = {
             Text(
                 text = stringResource(id = R.string.detail_screen_title),
-                modifier = Modifier.testTag(CHARACTER_DETAIL_SCREEN_TOOLBAR_TEST_TAG),
+                modifier = Modifier.testTag(CharacterDetailScreenTag.TOOLBAR.value),
             )
         },
         navigationIcon = {
             IconButton(onClick = { onBackButtonClicked() }) {
-                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "")
+                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "")
             }
         },
     )
@@ -88,7 +96,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
             style = CustomThemeResources.typography.headlineMedium,
             modifier = Modifier
                 .fillMaxWidth()
-                .testTag(CHARACTER_DETAIL_SCREEN_NAME_TEST_TAG),
+                .testTag(CharacterDetailScreenTag.NAME.value),
         )
 
         Spacer(modifier = Modifier.size(Dimens.dimen16))
@@ -99,7 +107,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
             style = CustomThemeResources.typography.headlineSmall,
             modifier = Modifier
                 .fillMaxWidth()
-                .testTag(CHARACTER_DETAIL_SCREEN_HOUSE_TEST_TAG),
+                .testTag(CharacterDetailScreenTag.HOUSE.value),
         )
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
@@ -109,7 +117,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
             style = CustomThemeResources.typography.bodyLarge,
             modifier = Modifier
                 .fillMaxWidth()
-                .testTag(CHARACTER_DETAIL_SCREEN_ACTOR_NAME_TEST_TAG),
+                .testTag(CharacterDetailScreenTag.ACTOR.value),
         )
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
@@ -119,7 +127,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
             style = CustomThemeResources.typography.bodyLarge,
             modifier = Modifier
                 .fillMaxWidth()
-                .testTag(CHARACTER_DETAIL_SCREEN_GENDER_TEST_TAG),
+                .testTag(CharacterDetailScreenTag.GENDER.value),
         )
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
@@ -129,7 +137,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
             style = CustomThemeResources.typography.bodyLarge,
             modifier = Modifier
                 .fillMaxWidth()
-                .testTag(CHARACTER_DETAIL_SCREEN_SPECIES_TEST_TAG),
+                .testTag(CharacterDetailScreenTag.SPECIES.value),
         )
         Spacer(modifier = Modifier.size(Dimens.dimen16))
         CharacterDetailText(
@@ -139,7 +147,7 @@ fun CharacterDetailContent(characterUI: CharacterUI) {
             style = CustomThemeResources.typography.bodyLarge,
             modifier = Modifier
                 .fillMaxWidth()
-                .testTag(CHARACTER_DETAIL_SCREEN_BIRTHDAY_TEST_TAG),
+                .testTag(CharacterDetailScreenTag.BIRTHDAY.value),
         )
     }
 }
@@ -208,24 +216,12 @@ fun CharacterDetailScreenPreview() {
 
 private const val MAX_LINES = 1
 
-@VisibleForTesting
-const val CHARACTER_DETAIL_SCREEN_TOOLBAR_TEST_TAG = "CHARACTER_DETAIL_SCREEN_TOOLBAR_TEST_TAG"
-
-@VisibleForTesting
-const val CHARACTER_DETAIL_SCREEN_NAME_TEST_TAG = "CHARACTER_DETAIL_SCREEN_NAME_TEST_TAG"
-
-@VisibleForTesting
-const val CHARACTER_DETAIL_SCREEN_HOUSE_TEST_TAG = "CHARACTER_DETAIL_SCREEN_HOUSE_TEST_TAG"
-
-@VisibleForTesting
-const val CHARACTER_DETAIL_SCREEN_ACTOR_NAME_TEST_TAG =
-    "CHARACTER_DETAIL_SCREEN_ACTOR_NAME_TEST_TAG"
-
-@VisibleForTesting
-const val CHARACTER_DETAIL_SCREEN_GENDER_TEST_TAG = "CHARACTER_DETAIL_SCREEN_GENDER_TEST_TAG"
-
-@VisibleForTesting
-const val CHARACTER_DETAIL_SCREEN_SPECIES_TEST_TAG = "CHARACTER_DETAIL_SCREEN_SPECIES_TEST_TAG"
-
-@VisibleForTesting
-const val CHARACTER_DETAIL_SCREEN_BIRTHDAY_TEST_TAG = "CHARACTER_DETAIL_SCREEN_BIRTHDAY_TEST_TAG"
+enum class CharacterDetailScreenTag(val value: String) {
+    TOOLBAR("CHARACTER_DETAIL_SCREEN_TOOLBAR_TEST_TAG"),
+    NAME("CHARACTER_DETAIL_SCREEN_NAME_TEST_TAG"),
+    HOUSE("CHARACTER_DETAIL_SCREEN_HOUSE_TEST_TAG"),
+    ACTOR("CHARACTER_DETAIL_SCREEN_ACTOR_NAME_TEST_TAG"),
+    GENDER("CHARACTER_DETAIL_SCREEN_GENDER_TEST_TAG"),
+    SPECIES("CHARACTER_DETAIL_SCREEN_SPECIES_TEST_TAG"),
+    BIRTHDAY("CHARACTER_DETAIL_SCREEN_BIRTHDAY_TEST_TAG"),
+}

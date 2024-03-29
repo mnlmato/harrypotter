@@ -2,12 +2,10 @@ package com.harrypotter.utils
 
 import com.harrypotter.coreui.dispatchers.CoroutinesDispatchers
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestDispatcher
 
-@ExperimentalCoroutinesApi
-class CoroutinesDispatchersTestImpl constructor(
-    testCoroutineDispatcher: TestCoroutineDispatcher
+class CoroutinesDispatchersTestImpl(
+    testCoroutineDispatcher: TestDispatcher,
 ) : CoroutinesDispatchers {
     override val immediate: CoroutineDispatcher = testCoroutineDispatcher
     override val main: CoroutineDispatcher = testCoroutineDispatcher
