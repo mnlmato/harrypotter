@@ -7,25 +7,25 @@ import com.harrypotter.viewinteraction.ViewInteractionTest
 class CharacterDetailPage(composeTestRule: ComposeTestRule) {
 
     private val mainPageView =
-        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_TOOLBAR_TEST_TAG)
+        ViewInteractionTest(composeTestRule, testTag = CharacterDetailScreenTag.TOOLBAR.value)
 
     val nameDetailTextView =
-        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_NAME_TEST_TAG)
+        ViewInteractionTest(composeTestRule, testTag = CharacterDetailScreenTag.NAME.value)
 
     val houseDetailTextView =
-        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_HOUSE_TEST_TAG)
+        ViewInteractionTest(composeTestRule, testTag = CharacterDetailScreenTag.HOUSE.value)
 
     val actorNameDetailTextView =
-        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_ACTOR_NAME_TEST_TAG)
+        ViewInteractionTest(composeTestRule, testTag = CharacterDetailScreenTag.ACTOR.value)
 
     val genderDetailTextView =
-        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_GENDER_TEST_TAG)
+        ViewInteractionTest(composeTestRule, testTag = CharacterDetailScreenTag.GENDER.value)
 
     val speciesDetailTextView =
-        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_SPECIES_TEST_TAG)
+        ViewInteractionTest(composeTestRule, testTag = CharacterDetailScreenTag.SPECIES.value)
 
     val birthdayDetailTextView =
-        ViewInteractionTest(composeTestRule, testTag = CHARACTER_DETAIL_SCREEN_BIRTHDAY_TEST_TAG)
+        ViewInteractionTest(composeTestRule, testTag = CharacterDetailScreenTag.BIRTHDAY.value)
 
     fun isScreenDisplayed() {
         mainPageView.isDisplayed()

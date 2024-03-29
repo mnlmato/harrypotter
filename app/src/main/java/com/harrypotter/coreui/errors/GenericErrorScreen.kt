@@ -1,7 +1,10 @@
 package com.harrypotter.coreui.errors
 
-import androidx.annotation.VisibleForTesting
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,11 +28,11 @@ fun GenericErrorScreen(
     ) {
         Text(
             text = stringResource(id = R.string.generic_error_title),
-            modifier = Modifier.testTag(GENERIC_ERROR_TEXT_TAG),
+            modifier = Modifier.testTag(GenericErrorScreenTag.TEXT.value),
         )
         Spacer(modifier = Modifier.padding(all = 16.dp))
         Button(
-            modifier = Modifier.testTag(GENERIC_ERROR_BUTTON_TAG),
+            modifier = Modifier.testTag(GenericErrorScreenTag.BUTTON.value),
             onClick = { onRetryButtonClickListener.onClick() }
         ) {
             Text(text = stringResource(id = R.string.generic_error_retry_button))
@@ -43,8 +46,7 @@ fun GenericErrorScreenPreview() {
     GenericErrorScreen {}
 }
 
-@VisibleForTesting
-const val GENERIC_ERROR_TEXT_TAG = "GENERIC_ERROR_TEXT_TAG"
-
-@VisibleForTesting
-const val GENERIC_ERROR_BUTTON_TAG = "GENERIC_ERROR_BUTTON_TAG"
+enum class GenericErrorScreenTag(val value: String) {
+    TEXT("GENERIC_ERROR_TEXT_TAG"),
+    BUTTON("GENERIC_ERROR_BUTTON_TAG"),
+}
