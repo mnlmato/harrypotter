@@ -18,9 +18,9 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
 
@@ -29,7 +29,7 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
     private val mockCharactersLocalDatasource = mockk<CharactersLocalDatasource>()
     private lateinit var subject: CharactersRepositoryImpl
 
-    @Before
+    @BeforeEach
     fun setUp() {
         subject = CharactersRepositoryImpl(
             mockCharactersApiDataSource,
@@ -48,7 +48,7 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
         val realResult = runBlocking { subject.getCharacters() }
 
         val expectedResult = DataResult.Success(Characters(list = getCharactersExpected()))
-        Assert.assertEquals(expectedResult, realResult)
+        Assertions.assertEquals(expectedResult, realResult)
     }
 
     @Test
@@ -76,7 +76,7 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
         val realResult = runBlocking { subject.getCharacters() }
 
         val expectedResult = DataResult.Success(Characters(list = getCharactersExpected()))
-        Assert.assertEquals(expectedResult, realResult)
+        Assertions.assertEquals(expectedResult, realResult)
     }
 
     @Test
@@ -90,7 +90,7 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
         val realResult = runBlocking { subject.getCharacters() }
 
         val expectedResult = DataResult.Error(UnavailableServerException(""))
-        Assert.assertEquals(expectedResult, realResult)
+        Assertions.assertEquals(expectedResult, realResult)
     }
 
     @Test
@@ -102,7 +102,7 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
         val realResult = runBlocking { subject.getCharacters() }
 
         val expectedResult = DataResult.Error(GenericException(""))
-        Assert.assertEquals(expectedResult, realResult)
+        Assertions.assertEquals(expectedResult, realResult)
     }
 
     @Test
@@ -130,6 +130,6 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
             species = SpeciesType.HUMAN,
             birth = "01-01-1986"
         )
-        Assert.assertEquals(expectedResult, realResult)
+        Assertions.assertEquals(expectedResult, realResult)
     }
 }

@@ -3,8 +3,8 @@ package com.harrypotter.features.characters.commons.data.repository.mapper
 import com.harrypotter.features.characters.main.domain.model.HouseType
 import io.kotest.data.blocking.forAll
 import io.kotest.data.row
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class HouseValueResponseMapperTest {
 
@@ -20,7 +20,7 @@ class HouseValueResponseMapperTest {
             val realResult = HouseValueResponseMapper.toType(value)
 
             val expectedResult: HouseType = houseType
-            Assert.assertEquals(expectedResult, realResult)
+            Assertions.assertEquals(expectedResult, realResult)
         }
     }
 }

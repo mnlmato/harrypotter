@@ -1,11 +1,13 @@
 plugins {
     id("com.android.application")
+    id("dagger.hilt.android.plugin")
     id("kotlin-android")
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
 }
 
 android {
+
+    namespace = "com.harrypotter"
 
     compileSdk = 34
     defaultConfig {
@@ -38,12 +40,16 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.1"
     }
-    namespace = "com.harrypotter"
+
+    lint {
+        lintConfig = file("$rootDir/lint-ignored.xml")
+    }
 
     dependencies {
         // Architecture components
@@ -53,7 +59,7 @@ android {
         implementation("android.arch.lifecycle:viewmodel:1.1.1")
         implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
         implementation("androidx.navigation:navigation-compose:2.7.7")
-        implementation("androidx.compose.runtime:runtime-livedata:1.6.4")
+        implementation("androidx.compose.runtime:runtime-livedata:1.6.5")
 
         // DI
         implementation("com.google.dagger:hilt-android:2.45")
@@ -90,8 +96,8 @@ android {
         androidTestImplementation("com.jakewharton.espresso:okhttp3-idling-resource:1.0.0")
 
         // Test rules and transitive dependencies:
-        androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.6.4")
-        debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.4")
+        androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.6.5")
+        debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.5")
         debugImplementation("androidx.test:monitor:1.6.1")
 
         // UI - Compose setup: https://developer.android.com/jetpack/compose/setup?hl=es-419
