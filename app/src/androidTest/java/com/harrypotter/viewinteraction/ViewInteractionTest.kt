@@ -33,4 +33,8 @@ class ViewInteractionTest(
     fun performItemClickAtPosition(position: Int, waitForView: Boolean = false) {
         getViewInteraction(waitForView, viewInteraction).onChildAt(position).performClick()
     }
+
+    fun performClick(waitForView: Boolean = false) {
+        getViewInteraction(waitForView, viewInteraction).performClick()
+    }
 }
