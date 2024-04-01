@@ -1,0 +1,29 @@
+name: Android CI
+
+on:
+  push:
+    branches:
+      - ${{ github.ref }}
+  pull_request:
+    branches:
+      - ${{ github.ref }}
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Build appa
+        run: ./gradlew assemble
