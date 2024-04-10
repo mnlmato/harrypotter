@@ -14,16 +14,12 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import org.junit.Assert
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 @ExperimentalCoroutinesApi
 class CharactersViewModelTest : CharactersFakeVMGenerator {
-
-    @get:Rule
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val testCoroutineDispatcher = UnconfinedTestDispatcher()
     private val getCharactersUseCase: GetCharactersUseCase = mockk()
@@ -31,7 +27,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
     private val coroutinesDispatchers = CoroutinesDispatchersTestImpl(testCoroutineDispatcher)
     private lateinit var subject: CharactersViewModel
 
-    @Before
+    @BeforeEach
     fun setUp() {
         subject = CharactersViewModel(
             getCharactersUseCase,
@@ -41,7 +37,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
     }
 
     @Test
-    fun `GIVEN result success WHE loadCharacters THEN livedata should show right charactersUI`() {
+    fun `GIVEN result success WHEN loadCharacters THEN livedata should show right charactersUI`() {
         coEvery { getCharactersUseCase() } returns DataResult.Success(getCharactersFake())
         every { resourceProvider.getString(any()) } returns "Foo"
 
@@ -49,7 +45,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
 
         val realResult = subject.charactersStateEvent.getOrAwaitValue()
         val expectedResult = CharactersState.Success(getCharactersUIExpected())
-        Assert.assertEquals(expectedResult, realResult)
+        Assertions.assertEquals(expectedResult, realResult)
     }
 
     @Test
@@ -60,7 +56,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
 
         val realResult = subject.charactersStateEvent.getOrAwaitValue()
         val expectedResult = CharactersState.Error
-        Assert.assertEquals(expectedResult, realResult)
+        Assertions.assertEquals(expectedResult, realResult)
     }
 
     @Test
@@ -78,7 +74,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
         subject.onItemClick(characterUI)
 
         val realResult = subject.showDetailEvent.getOrAwaitValue()
-        Assert.assertEquals("FooId1", realResult)
+        Assertions.assertEquals("FooId1", realResult)
     }
 
     @Test
@@ -89,7 +85,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
 
         val isLoadingShowedBeforeResponseExpected = CharactersState.Loading
         val isLoadingShowedBeforeResponseReal = subject.charactersStateEvent.getOrAwaitValue()
-        Assert.assertEquals(
+        Assertions.assertEquals(
             isLoadingShowedBeforeResponseExpected,
             isLoadingShowedBeforeResponseReal
         )

@@ -217,7 +217,6 @@ fun CharacterDetailScreenPreview() {
 private const val MAX_LINES = 1
 
 enum class CharacterDetailScreenTag(val value: String) {
-    ID("CHARACTER_DETAIL_SCREEN_ID_TEST_TAG"),
     TOOLBAR("CHARACTER_DETAIL_SCREEN_TOOLBAR_TEST_TAG"),
     NAME("CHARACTER_DETAIL_SCREEN_NAME_TEST_TAG"),
     HOUSE("CHARACTER_DETAIL_SCREEN_HOUSE_TEST_TAG"),

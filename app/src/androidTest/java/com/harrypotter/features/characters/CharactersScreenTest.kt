@@ -31,7 +31,7 @@ import javax.inject.Inject
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class CharactersScreenFlow {
+class CharactersScreenTest {
 
     @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)

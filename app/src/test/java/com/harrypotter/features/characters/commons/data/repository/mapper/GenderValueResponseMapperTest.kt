@@ -3,8 +3,8 @@ package com.harrypotter.features.characters.commons.data.repository.mapper
 import com.harrypotter.features.characters.main.domain.model.GenderType
 import io.kotest.data.blocking.forAll
 import io.kotest.data.row
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class GenderValueResponseMapperTest {
 
@@ -18,7 +18,7 @@ class GenderValueResponseMapperTest {
             val realResult = GenderValueResponseMapper.toType(value)
 
             val expectedResult: GenderType = genderType
-            Assert.assertEquals(expectedResult, realResult)
+            Assertions.assertEquals(expectedResult, realResult)
         }
     }
 }

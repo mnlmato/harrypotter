@@ -7,8 +7,8 @@ import io.kotest.data.blocking.forAll
 import io.kotest.data.row
 import io.mockk.every
 import io.mockk.mockk
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class HouseTypeMapperTest {
 
@@ -27,7 +27,7 @@ class HouseTypeMapperTest {
             val realResult = houseType.mapToString(resourceProvider)
 
             val expectedResult = "fooResultFromProvider"
-            Assert.assertEquals(expectedResult, realResult)
+            Assertions.assertEquals(expectedResult, realResult)
         }
     }
 }

@@ -4,8 +4,8 @@ import com.harrypotter.coreui.resourceprovider.ResourceProvider
 import com.harrypotter.features.characters.main.vm.CharactersFakeVMGenerator
 import io.mockk.every
 import io.mockk.mockk
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class CharactersMapperTest : CharactersFakeVMGenerator {
 
@@ -18,6 +18,6 @@ class CharactersMapperTest : CharactersFakeVMGenerator {
         val realResult = charactersFake.toCharactersUI(resourceProvider)
 
         val expectedResult = getCharactersUIExpected()
-        Assert.assertEquals(expectedResult, realResult)
+        Assertions.assertEquals(expectedResult, realResult)
     }
 }

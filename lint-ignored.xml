@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lint>
+    <issue id="NotificationPermission">
+        <!-- Workaround Error: When targeting Android 13 or higher, posting a permission requires holding the POST_NOTIFICATIONS permission (usage from com.bumptech.glide.request.target.NotificationTarget) -->
+        <ignore regexp="com.bumptech.glide.request.target.NotificationTarget" />
+    </issue>
+</lint>
