@@ -4,19 +4,15 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:8.3.1")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.45")
+        classpath(libs.android.tools.build.gradle)
+        classpath(libs.kotlin.gradle.plugin)
+        classpath(libs.dagger.hilt.android.gradle.plugin)
     }
 }
 
 allprojects {
     repositories {
-        google()
         mavenCentral()
+        google()
     }
-}
-
-tasks.register("clean", Delete::class) {
-    delete(layout.buildDirectory)
 }

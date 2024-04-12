@@ -1,8 +1,8 @@
 plugins {
-    id("com.android.application")
-    id("dagger.hilt.android.plugin")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    id(libs.plugins.android.application.get().pluginId)
+    id(libs.plugins.dagger.hilt.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
 android {
@@ -44,7 +44,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.1"
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
 
     lint {
@@ -53,64 +53,62 @@ android {
 
     dependencies {
         // Architecture components
-        implementation("androidx.activity:activity-ktx:1.8.2")
-        implementation("androidx.core:core-ktx:1.12.0")
-        implementation("android.arch.lifecycle:extensions:1.1.1")
-        implementation("android.arch.lifecycle:viewmodel:1.1.1")
-        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-        implementation("androidx.navigation:navigation-compose:2.7.7")
-        implementation("androidx.compose.runtime:runtime-livedata:1.6.5")
+        implementation(libs.androidx.activity)
+        implementation(libs.androidx.core)
+        implementation(libs.android.lifecycle.extensions)
+        implementation(libs.android.lifecycle.viewmodel)
+        implementation(libs.androidx.lifecycle.viewmodel)
+        implementation(libs.androidx.navigation.compose)
+        implementation(libs.androidx.compose.livedata)
 
         // DI
-        implementation("com.google.dagger:hilt-android:2.45")
-        kapt("com.google.dagger:hilt-compiler:2.45")
-        kapt("androidx.hilt:hilt-compiler:1.2.0")
-        annotationProcessor("androidx.hilt:hilt-compiler:1.2.0")
+        implementation(libs.hilt.android)
+        kapt(libs.hilt.compiler)
+        kapt(libs.hilt.compiler.androidx)
+        annotationProcessor(libs.hilt.compiler.androidx)
 
         // Network
-        implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
-        implementation("com.squareup.okhttp3:okhttp:4.2.1")
-        implementation("com.squareup.okhttp3:logging-interceptor:4.2.1")
-        implementation("com.squareup.retrofit2:converter-gson:2.8.1")
-        implementation("com.google.code.gson:gson:2.10.1")
+        implementation(libs.retrofit)
+        implementation(libs.coroutines.core)
+        implementation(libs.okhttp3)
+        implementation(libs.okhttp3.logging.interceptor)
+        implementation(libs.retrofit.converter.gson)
+        implementation(libs.google.gson)
 
         // Unit Testing
-        testImplementation("junit:junit:4.13.2")
-        testImplementation("androidx.test.ext:junit-ktx:1.1.5")
-        testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
-        testImplementation("androidx.arch.core:core-testing:2.2.0")
-        testImplementation("io.mockk:mockk:1.13.10")
-        testImplementation("io.kotest:kotest-runner-junit5-jvm:4.1.3")
-        androidTestImplementation("androidx.test.ext:junit:1.1.5")
+        testImplementation(libs.junit)
+        testImplementation(libs.androidx.test.junit.ktx)
+        testImplementation(libs.coroutines.test)
+        testImplementation(libs.androidx.core.testing)
+        testImplementation(libs.mockk)
+        testImplementation(libs.kotest)
+        androidTestImplementation(libs.androidx.test.junit.ext)
 
-        // Espresso dependencies - compose setup: https://developer.android.com/jetpack/compose/testing?hl=es-419
-        androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-        androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
-        androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
-        androidTestImplementation("androidx.test:core-ktx:1.5.0")
-        androidTestImplementation("androidx.test.ext:junit-ktx:1.1.5")
-        androidTestImplementation("com.google.dagger:hilt-android-testing:2.34.1-beta")
-        kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.34.1-beta")
-        androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.2.1")
-        androidTestImplementation("com.jakewharton.espresso:okhttp3-idling-resource:1.0.0")
+        // UI testing
+        androidTestImplementation(libs.androidx.test.espresso.core)
+        androidTestImplementation(libs.androidx.test.espresso.contrib)
+        androidTestImplementation(libs.androidx.test.espresso.intents)
+        androidTestImplementation(libs.androidx.test.core.ktx)
+        androidTestImplementation(libs.androidx.test.junit.ktx)
+        androidTestImplementation(libs.hilt.android.testing)
+        kaptAndroidTest(libs.hilt.android.compiler)
+        androidTestImplementation(libs.okhttp3.mockwebserver)
+        androidTestImplementation(libs.espresso.okhttp3.idling.resource)
 
         // Test rules and transitive dependencies:
-        androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.6.5")
-        debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.5")
-        debugImplementation("androidx.test:monitor:1.6.1")
+        androidTestImplementation(libs.androidx.compose.ui)
+        debugImplementation(libs.androidx.compose.ui.test.manifest)
+        debugImplementation(libs.androidx.test.monitor)
 
-        // UI - Compose setup: https://developer.android.com/jetpack/compose/setup?hl=es-419
-        val composeBom = platform("androidx.compose:compose-bom:2024.03.00")
+        val composeBom = platform(libs.androidx.compose.bom)
         implementation(composeBom)
         androidTestImplementation(composeBom)
-        implementation("androidx.compose.material3:material3")
-        implementation("androidx.compose.ui:ui-tooling-preview")
-        debugImplementation("androidx.compose.ui:ui-tooling")
-        implementation("com.github.bumptech.glide:compose:1.0.0-alpha.1")
-
-        implementation("androidx.appcompat:appcompat:1.6.1")
-        implementation("com.google.android.material:material:1.11.0")
+        implementation(libs.androidx.compose.material3)
+        implementation(libs.androidx.compose.ui.tooling.preview)
+        debugImplementation(libs.androidx.compose.ui.tooling)
+        implementation(libs.glide.compose)
+        implementation(libs.androidx.appcompat)
+        implementation(libs.google.android.material)
     }
 }
 
@@ -120,6 +118,6 @@ kapt {
 
 configurations.all {
     resolutionStrategy {
-        force("androidx.test:core-ktx:1.5.0")
+        force(libs.androidx.test.core.ktx)
     }
 }
