@@ -3,8 +3,8 @@ package com.harrypotter.features.characters.commons.data.repository.mapper
 import com.harrypotter.features.characters.main.domain.model.SpeciesType
 import io.kotest.data.blocking.forAll
 import io.kotest.data.row
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class SpeciesValueResponseMapperTest {
 
@@ -33,7 +33,7 @@ class SpeciesValueResponseMapperTest {
             val realResult = SpeciesValueResponseMapper.toType(value)
 
             val expectedResult: SpeciesType = specieType
-            Assertions.assertEquals(expectedResult, realResult)
+            Assert.assertEquals(expectedResult, realResult)
         }
     }
 }

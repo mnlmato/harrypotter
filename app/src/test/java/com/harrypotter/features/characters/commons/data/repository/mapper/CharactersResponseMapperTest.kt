@@ -2,8 +2,8 @@ package com.harrypotter.features.characters.commons.data.repository.mapper
 
 import com.harrypotter.features.characters.commons.data.datasource.api.CharactersFakeApiGenerator
 import com.harrypotter.features.characters.main.domain.model.Characters
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class CharactersResponseMapperTest : CharactersFakeApiGenerator {
 
@@ -14,6 +14,6 @@ class CharactersResponseMapperTest : CharactersFakeApiGenerator {
         val realResult = fakeResponse.toCharacters()
 
         val expectedResult = Characters(getCharactersExpected())
-        Assertions.assertEquals(expectedResult, realResult)
+        Assert.assertEquals(expectedResult, realResult)
     }
 }

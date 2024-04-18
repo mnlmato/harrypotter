@@ -3,11 +3,22 @@ package com.harrypotter.features.characters.main.ui.design
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,9 +40,11 @@ import com.harrypotter.features.characters.main.vm.model.CharacterUI
 import com.harrypotter.features.characters.main.vm.model.CharactersListUI
 import com.harrypotter.features.characters.main.vm.model.CharactersState
 
+private typealias OnCharacterItemListener = (CharacterUI) -> Unit
+
 @Composable
 fun CharactersScreen(
-    charactersState: CharactersState,
+    charactersState: CharactersState.UI,
     onCharacterItemListener: OnCharacterItemListener,
     onRetryButtonClickListener: OnRetryButtonClickListener,
 ) {
@@ -39,15 +52,15 @@ fun CharactersScreen(
         topBar = { ToolbarCharacters() },
     ) {
         when (charactersState) {
-            is CharactersState.Loading -> {
+            is CharactersState.UI.Loading -> {
                 LoadingCustom(Modifier.fillMaxSize())
             }
 
-            is CharactersState.Error -> {
+            is CharactersState.UI.Error -> {
                 GenericErrorScreen(onRetryButtonClickListener = onRetryButtonClickListener)
             }
 
-            is CharactersState.Success -> {
+            is CharactersState.UI.Success -> {
                 CharactersList(
                     charactersList = charactersState.characters,
                     modifier = Modifier.padding(paddingValues = it),
@@ -128,7 +141,7 @@ fun CharacterItemRow(
             .fillMaxWidth()
             .height(Dimens.dimen96)
             .clip(shape = CustomShape.types.extraLarge)
-            .clickable { onCharacterItemListener.onClick(characterUI) }
+            .clickable { onCharacterItemListener(characterUI) }
     ) {
         Spacer(modifier = Modifier.padding(horizontal = Dimens.dimen8))
         NetworkImage(
@@ -182,7 +195,7 @@ fun CharacterDetailScreenPreview() {
             birth = "31-07-1980",
         ),
     ).groupBy { it.house }
-    CharactersScreen(CharactersState.Success(CharactersListUI(successData)), {}, {})
+    CharactersScreen(CharactersState.UI.Success(CharactersListUI(successData)), {}, {})
 }
 
 private const val MAX_LINES = 1

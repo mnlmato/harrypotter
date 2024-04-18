@@ -7,8 +7,8 @@ import io.kotest.data.blocking.forAll
 import io.kotest.data.row
 import io.mockk.every
 import io.mockk.mockk
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 
 class SpeciesTypeMapperTest {
 
@@ -40,7 +40,7 @@ class SpeciesTypeMapperTest {
             val realResult = specieType.mapToString(resourceProvider)
 
             val expectedResult = "fooResultFromProvider"
-            Assertions.assertEquals(expectedResult, realResult)
+            Assert.assertEquals(expectedResult, realResult)
         }
     }
 }
