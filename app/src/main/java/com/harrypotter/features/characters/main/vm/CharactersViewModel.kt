@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.harrypotter.coreui.dispatchers.CoroutinesDispatchers
 import com.harrypotter.coreui.resourceprovider.ResourceProvider
+import com.harrypotter.coreui.vm.ClickThrottler
 import com.harrypotter.coreui.vm.SingleLiveData
 import com.harrypotter.features.characters.main.domain.usecase.GetCharactersUseCase
 import com.harrypotter.features.characters.main.vm.mapper.toCharactersUI
@@ -20,6 +21,7 @@ import javax.inject.Inject
 class CharactersViewModel @Inject constructor(
     private val getCharactersUseCase: GetCharactersUseCase,
     private val resourceProvider: ResourceProvider,
+    private val clickThrottler: ClickThrottler,
     private val coroutinesDispatchers: CoroutinesDispatchers
 ) : ViewModel() {
 
@@ -53,6 +55,10 @@ class CharactersViewModel @Inject constructor(
     }
 
     fun onItemClick(character: CharacterUI) {
-        showDetailEvent.value = character.id
+        viewModelScope.launch(coroutinesDispatchers.main) {
+            clickThrottler.onClick {
+                showDetailEvent.value = character.id
+            }
+        }
     }
 }
