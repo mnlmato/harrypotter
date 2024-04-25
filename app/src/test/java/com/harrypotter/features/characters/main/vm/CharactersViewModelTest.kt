@@ -4,35 +4,43 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.harrypotter.coreapp.DataResult
 import com.harrypotter.coreapp.exceptions.GenericException
 import com.harrypotter.coreui.resourceprovider.ResourceProvider
+import com.harrypotter.coreui.vm.ClickThrottler
 import com.harrypotter.features.characters.main.domain.usecase.GetCharactersUseCase
 import com.harrypotter.features.characters.main.vm.model.CharacterUI
 import com.harrypotter.features.characters.main.vm.model.CharactersState
 import com.harrypotter.utils.CoroutinesDispatchersTestImpl
 import com.harrypotter.utils.getOrAwaitValue
+import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class CharactersViewModelTest : CharactersFakeVMGenerator {
 
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
+
     private val testCoroutineDispatcher = UnconfinedTestDispatcher()
     private val getCharactersUseCase: GetCharactersUseCase = mockk()
     private val resourceProvider: ResourceProvider = mockk()
+    private val clickThrottler: ClickThrottler = mockk()
     private val coroutinesDispatchers = CoroutinesDispatchersTestImpl(testCoroutineDispatcher)
     private lateinit var subject: CharactersViewModel
 
-    @BeforeEach
-    fun setUp() {
+    @Before
+    fun setup() {
         subject = CharactersViewModel(
             getCharactersUseCase,
             resourceProvider,
-            coroutinesDispatchers
+            clickThrottler,
+            coroutinesDispatchers,
         )
     }
 
@@ -45,7 +53,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
 
         val realResult = subject.charactersStateEvent.getOrAwaitValue()
         val expectedResult = CharactersState.Success(getCharactersUIExpected())
-        Assertions.assertEquals(expectedResult, realResult)
+        realResult shouldBe expectedResult
     }
 
     @Test
@@ -56,11 +64,15 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
 
         val realResult = subject.charactersStateEvent.getOrAwaitValue()
         val expectedResult = CharactersState.Error
-        Assertions.assertEquals(expectedResult, realResult)
+        realResult shouldBe expectedResult
     }
 
     @Test
     fun `WHEN onItemClick THEN show detail screen event passing the id`() {
+        coEvery { clickThrottler.onClick(any()) } answers {
+            runBlocking { firstArg<suspend () -> Unit>().invoke() }
+        }
+
         val characterUI = CharacterUI(
             id = "FooId1",
             name = "FooName1",
@@ -74,7 +86,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
         subject.onItemClick(characterUI)
 
         val realResult = subject.showDetailEvent.getOrAwaitValue()
-        Assertions.assertEquals("FooId1", realResult)
+        realResult shouldBe "FooId1"
     }
 
     @Test
@@ -85,9 +97,6 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
 
         val isLoadingShowedBeforeResponseExpected = CharactersState.Loading
         val isLoadingShowedBeforeResponseReal = subject.charactersStateEvent.getOrAwaitValue()
-        Assertions.assertEquals(
-            isLoadingShowedBeforeResponseExpected,
-            isLoadingShowedBeforeResponseReal
-        )
+        isLoadingShowedBeforeResponseReal shouldBe isLoadingShowedBeforeResponseExpected
     }
 }

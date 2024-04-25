@@ -2,12 +2,12 @@ package com.harrypotter.features.characters.commons.data.datasource.api
 
 import com.harrypotter.coreapp.DataResult
 import com.harrypotter.coreapp.exceptions.NetworkException
+import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Before
+import org.junit.Test
 import java.io.IOException
 
 class CharactersApiDatasourceTest : CharactersFakeApiGenerator {
@@ -15,7 +15,7 @@ class CharactersApiDatasourceTest : CharactersFakeApiGenerator {
     private val mockCharactersApi = mockk<CharactersApi>()
     private lateinit var subject: CharactersApiDatasource
 
-    @BeforeEach
+    @Before
     fun setUp() {
         subject = CharactersApiDatasource(mockCharactersApi)
     }
@@ -27,7 +27,7 @@ class CharactersApiDatasourceTest : CharactersFakeApiGenerator {
         val realResult = runBlocking { subject.getCharacters() }
 
         val expectedResult = DataResult.Success(getCharactersResponseFake())
-        Assertions.assertEquals(expectedResult, realResult)
+        realResult shouldBe expectedResult
     }
 
     @Test
@@ -37,6 +37,6 @@ class CharactersApiDatasourceTest : CharactersFakeApiGenerator {
         val realResult = runBlocking { subject.getCharacters() }
 
         val expectedResult = DataResult.Error(NetworkException(""))
-        Assertions.assertEquals(expectedResult, realResult)
+        realResult shouldBe expectedResult
     }
 }

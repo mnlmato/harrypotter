@@ -31,11 +31,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "18"
     }
 
     buildFeatures {
@@ -49,6 +49,13 @@ android {
 
     lint {
         lintConfig = file("$rootDir/lint-ignored.xml")
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+        }
     }
 
     dependencies {
@@ -76,7 +83,6 @@ android {
         implementation(libs.google.gson)
 
         // Unit Testing
-        testImplementation(libs.junit)
         testImplementation(libs.androidx.test.junit.ktx)
         testImplementation(libs.coroutines.test)
         testImplementation(libs.androidx.core.testing)

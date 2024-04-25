@@ -3,13 +3,13 @@ package com.harrypotter.features.characters.main.domain.usecase
 import com.harrypotter.coreapp.DataResult
 import com.harrypotter.coreapp.exceptions.GenericException
 import com.harrypotter.features.characters.main.domain.CharactersRepository
+import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Before
+import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class GetCharactersUseCaseTest : CharactersFakeDomainGenerator {
@@ -17,7 +17,7 @@ class GetCharactersUseCaseTest : CharactersFakeDomainGenerator {
     private val mockCharactersRepository = mockk<CharactersRepository>()
     private lateinit var subject: GetCharactersUseCase
 
-    @BeforeEach
+    @Before
     fun setUp() {
         subject = GetCharactersUseCase(mockCharactersRepository)
     }
@@ -31,7 +31,7 @@ class GetCharactersUseCaseTest : CharactersFakeDomainGenerator {
         val realResult = runBlocking { subject() }
 
         val expectedResult = DataResult.Success(getCharactersExpected())
-        Assertions.assertEquals(expectedResult, realResult)
+        realResult shouldBe expectedResult
     }
 
     @Test
@@ -43,6 +43,6 @@ class GetCharactersUseCaseTest : CharactersFakeDomainGenerator {
         val realResult = runBlocking { mockCharactersRepository.getCharacters() }
 
         val expectedResult = DataResult.Error(GenericException(""))
-        Assertions.assertEquals(expectedResult, realResult)
+        realResult shouldBe expectedResult
     }
 }

@@ -13,14 +13,14 @@ import com.harrypotter.features.characters.main.domain.model.Characters
 import com.harrypotter.features.characters.main.domain.model.GenderType
 import com.harrypotter.features.characters.main.domain.model.HouseType
 import com.harrypotter.features.characters.main.domain.model.SpeciesType
+import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Before
+import org.junit.Test
 
 class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
 
@@ -29,7 +29,7 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
     private val mockCharactersLocalDatasource = mockk<CharactersLocalDatasource>()
     private lateinit var subject: CharactersRepositoryImpl
 
-    @BeforeEach
+    @Before
     fun setUp() {
         subject = CharactersRepositoryImpl(
             mockCharactersApiDataSource,
@@ -48,7 +48,7 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
         val realResult = runBlocking { subject.getCharacters() }
 
         val expectedResult = DataResult.Success(Characters(list = getCharactersExpected()))
-        Assertions.assertEquals(expectedResult, realResult)
+        realResult shouldBe expectedResult
     }
 
     @Test
@@ -76,7 +76,7 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
         val realResult = runBlocking { subject.getCharacters() }
 
         val expectedResult = DataResult.Success(Characters(list = getCharactersExpected()))
-        Assertions.assertEquals(expectedResult, realResult)
+        realResult shouldBe expectedResult
     }
 
     @Test
@@ -90,7 +90,7 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
         val realResult = runBlocking { subject.getCharacters() }
 
         val expectedResult = DataResult.Error(UnavailableServerException(""))
-        Assertions.assertEquals(expectedResult, realResult)
+        realResult shouldBe expectedResult
     }
 
     @Test
@@ -102,7 +102,7 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
         val realResult = runBlocking { subject.getCharacters() }
 
         val expectedResult = DataResult.Error(GenericException(""))
-        Assertions.assertEquals(expectedResult, realResult)
+        realResult shouldBe expectedResult
     }
 
     @Test
@@ -130,6 +130,6 @@ class CharactersRepositoryImplTest : CharactersFakeApiGenerator {
             species = SpeciesType.HUMAN,
             birth = "01-01-1986"
         )
-        Assertions.assertEquals(expectedResult, realResult)
+        realResult shouldBe expectedResult
     }
 }
