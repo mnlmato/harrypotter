@@ -1,14 +1,14 @@
 [versions]
 
-kotlinCompilerExtensionVersion = "1.4.1"
-kotlin = "1.8.0"
+kotlinCompilerExtensionVersion = "1.5.12"
+kotlin = "1.9.23"
 agp = "8.3.2"
 
 lifecycle = "1.1.1"
-hilt = "2.45"
+hilt = "2.51.1"
 hilt_android = "2.34.1-beta"
 kotlinx_coroutines = "1.7.1"
-okhttp = "4.2.1"
+okhttp = "4.12.0"
 junit_ktx = "1.1.5"
 espresso = "3.5.1"
 
@@ -72,6 +72,7 @@ glide_compose = { group = "com.github.bumptech.glide", name = "compose", version
 android_tools_build_gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin_gradle_plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 dagger_hilt_android_gradle_plugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
+paparazzi = { group = "app.cash.paparazzi", name = "paparazzi-gradle-plugin", version = "1.3.3" }
 
 
 [plugins]
@@ -80,3 +81,4 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 dagger-hilt = { id = "dagger.hilt.android.plugin" }
 kotlin-android = { id = "kotlin-android" }
 kotlin-kapt = { id = "kotlin-kapt" }
+paparazzi = { id = "app.cash.paparazzi", version = "1.3.3" }

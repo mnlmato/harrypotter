@@ -3,6 +3,7 @@ plugins {
     id(libs.plugins.dagger.hilt.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.kotlin.kapt.get().pluginId)
+    id(libs.plugins.paparazzi.get().pluginId)
 }
 
 android {
@@ -31,11 +32,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "18"
     }
 
     buildFeatures {
@@ -49,6 +50,33 @@ android {
 
     lint {
         lintConfig = file("$rootDir/lint-ignored.xml")
+    }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+        }
+    }
+
+    // Paparazzi: Remove when https://github.com/google/guava/issues/6567 is fixed.
+    // See also: https://github.com/google/guava/issues/6801.
+    dependencies.constraints {
+        testImplementation("com.google.guava:guava") {
+            attributes {
+                attribute(
+                    TargetJvmEnvironment.TARGET_JVM_ENVIRONMENT_ATTRIBUTE,
+                    objects.named(
+                        TargetJvmEnvironment::class.java,
+                        TargetJvmEnvironment.STANDARD_JVM
+                    )
+                )
+            }
+            because(
+                "Paparazzi's layoutlib and sdk-common depend on Guava's -jre published variant." +
+                        "See https://github.com/cashapp/paparazzi/issues/906."
+            )
+        }
     }
 
     dependencies {
