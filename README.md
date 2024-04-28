@@ -12,7 +12,7 @@ This is a sample project written in Kotlin using MVVM, Use Case and the Reposito
 - Additionally, the detail screen uses an ID to fetch data from a cache data source
 - The build gradle files were migrated to Kotlin
 - The dependencies were migrated to version catalogs
-- An easy CI was built using GitHub actions to do the build and run the unit tests
+- An easy CI was built using GitHub actions to do the build and run unit tests and screenshot tests
 
 
 The project includes the following test:
@@ -20,6 +20,7 @@ The project includes the following test:
 -  Unit Test with JUnit, MockK and Kotest
 -  Integration Test with MockWebServer
 -  Instrumented Test  using the Page Object Pattern
+-  Screenshot tests with Paparazzi
 
 ## Video demo
 
