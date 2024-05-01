@@ -4,6 +4,7 @@ plugins {
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.kotlin.kapt.get().pluginId)
     id(libs.plugins.paparazzi.get().pluginId)
+    id(libs.plugins.hiltConvention.get().pluginId)
 }
 
 android {
@@ -88,12 +89,6 @@ android {
         implementation(libs.androidx.lifecycle.viewmodel)
         implementation(libs.androidx.navigation.compose)
         implementation(libs.androidx.compose.livedata)
-
-        // DI
-        implementation(libs.hilt.android)
-        kapt(libs.hilt.compiler)
-        kapt(libs.hilt.compiler.androidx)
-        annotationProcessor(libs.hilt.compiler.androidx)
 
         // Network
         implementation(libs.retrofit)
