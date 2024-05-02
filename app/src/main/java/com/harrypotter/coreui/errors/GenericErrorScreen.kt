@@ -19,7 +19,7 @@ import com.harrypotter.R
 @Composable
 fun GenericErrorScreen(
     modifier: Modifier = Modifier,
-    onRetryButtonClickListener: OnRetryButtonClickListener,
+    onRetryButtonClickListener: () -> Unit,
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -33,7 +33,7 @@ fun GenericErrorScreen(
         Spacer(modifier = Modifier.padding(all = 16.dp))
         Button(
             modifier = Modifier.testTag(GenericErrorScreenTag.BUTTON.value),
-            onClick = { onRetryButtonClickListener.onClick() }
+            onClick = { onRetryButtonClickListener() }
         ) {
             Text(text = stringResource(id = R.string.generic_error_retry_button))
         }
