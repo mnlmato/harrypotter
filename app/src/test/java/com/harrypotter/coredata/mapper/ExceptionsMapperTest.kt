@@ -2,8 +2,8 @@ package com.harrypotter.coredata.mapper
 
 import com.harrypotter.coreapp.exceptions.GenericException
 import com.harrypotter.coreapp.exceptions.NetworkException
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Test
 import java.io.IOException
 import java.net.UnknownHostException
 
@@ -16,7 +16,7 @@ class ExceptionsMapperTest {
         val realResult = currentException.toCustomException()
 
         val expectedResult = NetworkException("")
-        Assertions.assertEquals(expectedResult, realResult)
+        Assert.assertEquals(expectedResult, realResult)
     }
 
     @Test
@@ -26,7 +26,7 @@ class ExceptionsMapperTest {
         val realResult = currentException.toCustomException()
 
         val expectedResult = NetworkException("")
-        Assertions.assertEquals(expectedResult, realResult)
+        Assert.assertEquals(expectedResult, realResult)
     }
 
     @Test
@@ -36,6 +36,6 @@ class ExceptionsMapperTest {
         val realResult = currentException.toCustomException()
 
         val expectedResult = GenericException("")
-        Assertions.assertEquals(expectedResult, realResult)
+        Assert.assertEquals(expectedResult, realResult)
     }
 }
