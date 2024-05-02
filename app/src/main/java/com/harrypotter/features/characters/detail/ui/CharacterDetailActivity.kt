@@ -29,8 +29,8 @@ class CharacterDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView()
-        observeCloseEvent()
         viewModel.loadCharacter(getCharacterId())
+        subscribeToSingleEvents()
     }
 
     private fun setContentView() {
@@ -44,12 +44,12 @@ class CharacterDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeCloseEvent() {
-        viewModel.closeScreenEvent.observe(this) { finish() }
-    }
-
     private fun getCharacterId() = intent.extras?.getString(ARG_CHARACTER)
         ?: throw IllegalArgumentException("Character id is mandatory")
+
+    private fun subscribeToSingleEvents() {
+        viewModel.closeScreenEvent.observe(this) { finish() }
+    }
 }
 
 private const val ARG_CHARACTER = "ARG_CHARACTER"
