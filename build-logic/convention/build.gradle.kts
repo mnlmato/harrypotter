@@ -13,5 +13,9 @@ gradlePlugin {
             id = "gradlePlugins.convention.di.hilt"
             implementationClass = "gradleplugins.HiltDependencyInjectionPlugin"
         }
+        register("composePlugin") {
+            id = "gradlePlugins.convention.ui.compose"
+            implementationClass = "gradleplugins.ComposePlugin"
+        }
     }
 }

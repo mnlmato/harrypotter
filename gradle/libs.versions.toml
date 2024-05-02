@@ -86,3 +86,4 @@ paparazzi = { id = "app.cash.paparazzi", version = "1.3.3" }
 
 # convention plugins
 hiltConvention = { id = "gradlePlugins.convention.di.hilt", version.ref = "pluginsVersion" }
+composeConvention = { id = "gradlePlugins.convention.ui.compose", version.ref = "pluginsVersion" }
