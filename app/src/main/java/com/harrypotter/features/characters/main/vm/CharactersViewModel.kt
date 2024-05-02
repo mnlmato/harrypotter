@@ -11,6 +11,7 @@ import com.harrypotter.coreui.vm.SingleLiveData
 import com.harrypotter.features.characters.main.domain.usecase.GetCharactersUseCase
 import com.harrypotter.features.characters.main.vm.mapper.toCharactersUI
 import com.harrypotter.features.characters.main.vm.model.CharacterUI
+import com.harrypotter.features.characters.main.vm.model.CharactersActionsFromUI
 import com.harrypotter.features.characters.main.vm.model.CharactersState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -25,40 +26,49 @@ class CharactersViewModel @Inject constructor(
     private val coroutinesDispatchers: CoroutinesDispatchers
 ) : ViewModel() {
 
-    val showDetailEvent = SingleLiveData<String>()
+    val actionsSingleEvents = SingleLiveData<CharactersState.SingleActions>()
 
     private val charactersStateMutableEvent =
-        MutableLiveData<CharactersState>(CharactersState.Loading)
+        MutableLiveData<CharactersState>(CharactersState.UI.Loading)
     val charactersStateEvent: LiveData<CharactersState>
         get() = charactersStateMutableEvent
 
-    fun onRetryButtonClicked() {
-        loadCharacters()
+    fun onCLickAction(action: CharactersActionsFromUI) {
+        when (action) {
+            is CharactersActionsFromUI.RetryButtonClick -> loadCharacters()
+            is CharactersActionsFromUI.ItemListClick -> onItemClick(action.character)
+            is CharactersActionsFromUI.OnBackClick -> onBackButtonClick()
+        }
     }
 
     fun loadCharacters() {
-        charactersStateMutableEvent.value = CharactersState.Loading
+        charactersStateMutableEvent.value = CharactersState.UI.Loading
         viewModelScope.launch(coroutinesDispatchers.immediate) {
             withContext(coroutinesDispatchers.io) {
                 getCharactersUseCase().fold(
                     onSuccess = {
                         val charactersListUI = it.toCharactersUI(resourceProvider)
-                        val successState = CharactersState.Success(charactersListUI)
+                        val successState = CharactersState.UI.Success(charactersListUI)
                         charactersStateMutableEvent.postValue(successState)
                     },
                     onError = {
-                        charactersStateMutableEvent.postValue(CharactersState.Error)
+                        charactersStateMutableEvent.postValue(CharactersState.UI.Error)
                     }
                 )
             }
         }
     }
 
-    fun onItemClick(character: CharacterUI) {
+    private fun onItemClick(character: CharacterUI) {
         viewModelScope.launch(coroutinesDispatchers.main) {
             clickThrottler.onClick {
-                showDetailEvent.value = character.id
+                actionsSingleEvents.value =
+                    CharactersState.SingleActions.ShowCharacterDetail(character.id)
             }
         }
+    }
+
+    private fun onBackButtonClick() {
+        actionsSingleEvents.value = CharactersState.SingleActions.CloseScreen
     }
 }

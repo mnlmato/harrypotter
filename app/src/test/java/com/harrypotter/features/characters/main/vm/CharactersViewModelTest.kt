@@ -7,11 +7,13 @@ import com.harrypotter.coreui.resourceprovider.ResourceProvider
 import com.harrypotter.coreui.vm.ClickThrottler
 import com.harrypotter.features.characters.main.domain.usecase.GetCharactersUseCase
 import com.harrypotter.features.characters.main.vm.model.CharacterUI
+import com.harrypotter.features.characters.main.vm.model.CharactersActionsFromUI
 import com.harrypotter.features.characters.main.vm.model.CharactersState
 import com.harrypotter.utils.CoroutinesDispatchersTestImpl
 import com.harrypotter.utils.getOrAwaitValue
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -20,6 +22,7 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import java.net.UnknownHostException
 
 @ExperimentalCoroutinesApi
 class CharactersViewModelTest : CharactersFakeVMGenerator {
@@ -52,7 +55,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
         subject.loadCharacters()
 
         val realResult = subject.charactersStateEvent.getOrAwaitValue()
-        val expectedResult = CharactersState.Success(getCharactersUIExpected())
+        val expectedResult = CharactersState.UI.Success(getCharactersUIExpected())
         realResult shouldBe expectedResult
     }
 
@@ -63,7 +66,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
         subject.loadCharacters()
 
         val realResult = subject.charactersStateEvent.getOrAwaitValue()
-        val expectedResult = CharactersState.Error
+        val expectedResult = CharactersState.UI.Error
         realResult shouldBe expectedResult
     }
 
@@ -83,10 +86,21 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
             species = "Foo",
             birth = "01-01-1986"
         )
-        subject.onItemClick(characterUI)
+        subject.onCLickAction(CharactersActionsFromUI.ItemListClick(characterUI))
 
-        val realResult = subject.showDetailEvent.getOrAwaitValue()
-        realResult shouldBe "FooId1"
+        val realResult = subject.actionsSingleEvents.getOrAwaitValue()
+        realResult shouldBe CharactersState.SingleActions.ShowCharacterDetail("FooId1")
+    }
+
+    @Test
+    fun `WHEN onRetryButtonClick THEN load data again`() {
+        coEvery { getCharactersUseCase() } returns DataResult.Error(UnknownHostException())
+
+        subject.onCLickAction(CharactersActionsFromUI.RetryButtonClick)
+
+        coVerify {
+            getCharactersUseCase()
+        }
     }
 
     @Test
@@ -95,7 +109,7 @@ class CharactersViewModelTest : CharactersFakeVMGenerator {
 
         subject.loadCharacters()
 
-        val isLoadingShowedBeforeResponseExpected = CharactersState.Loading
+        val isLoadingShowedBeforeResponseExpected = CharactersState.UI.Loading
         val isLoadingShowedBeforeResponseReal = subject.charactersStateEvent.getOrAwaitValue()
         isLoadingShowedBeforeResponseReal shouldBe isLoadingShowedBeforeResponseExpected
     }

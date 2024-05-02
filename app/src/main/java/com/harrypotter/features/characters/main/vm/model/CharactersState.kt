@@ -1,7 +1,14 @@
 package com.harrypotter.features.characters.main.vm.model
 
 sealed class CharactersState {
-    data class Success(val characters: CharactersListUI) : CharactersState()
-    object Loading : CharactersState()
-    object Error : CharactersState()
+    sealed class UI {
+        data class Success(val characters: CharactersListUI) : CharactersState()
+        data object Loading : CharactersState()
+        data object Error : CharactersState()
+    }
+
+    sealed class SingleActions {
+        data class ShowCharacterDetail(val id: String) : SingleActions()
+        data object CloseScreen : SingleActions()
+    }
 }
