@@ -19,39 +19,40 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.harrypotter.R
 import com.harrypotter.coreui.errors.GenericErrorScreen
-import com.harrypotter.coreui.errors.OnRetryButtonClickListener
 import com.harrypotter.coreui.image.NetworkImage
 import com.harrypotter.designsystem.components.loading.LoadingCustom
 import com.harrypotter.designsystem.theme.CustomShape
 import com.harrypotter.designsystem.theme.CustomThemeResources
 import com.harrypotter.designsystem.theme.Dimens
 import com.harrypotter.features.characters.main.vm.model.CharacterUI
+import com.harrypotter.features.characters.main.vm.model.CharactersActionsFromUI
 import com.harrypotter.features.characters.main.vm.model.CharactersListUI
 import com.harrypotter.features.characters.main.vm.model.CharactersState
 
 @Composable
 fun CharactersScreen(
     charactersState: CharactersState,
-    onCharacterItemListener: OnCharacterItemListener,
-    onRetryButtonClickListener: OnRetryButtonClickListener,
+    onClickAction: (CharactersActionsFromUI) -> Unit,
 ) {
     Scaffold(
         topBar = { ToolbarCharacters() },
     ) {
         when (charactersState) {
-            is CharactersState.Loading -> {
+            is CharactersState.UI.Loading -> {
                 LoadingCustom(Modifier.fillMaxSize())
             }
 
-            is CharactersState.Error -> {
-                GenericErrorScreen(onRetryButtonClickListener = onRetryButtonClickListener)
+            is CharactersState.UI.Error -> {
+                GenericErrorScreen(onRetryButtonClickListener = {
+                    onClickAction(CharactersActionsFromUI.RetryButtonClick)
+                })
             }
 
-            is CharactersState.Success -> {
+            is CharactersState.UI.Success -> {
                 CharactersList(
                     charactersList = charactersState.characters,
                     modifier = Modifier.padding(paddingValues = it),
-                    onCharacterItemListener = onCharacterItemListener,
+                    onClickAction = onClickAction,
                 )
             }
         }
@@ -73,7 +74,7 @@ fun ToolbarCharacters() {
 fun CharactersList(
     charactersList: CharactersListUI,
     modifier: Modifier,
-    onCharacterItemListener: OnCharacterItemListener,
+    onClickAction: (CharactersActionsFromUI) -> Unit,
 ) {
     LazyColumn(
         modifier = modifier
@@ -93,7 +94,7 @@ fun CharactersList(
             items(characters) {
                 CharacterItemRow(
                     characterUI = it,
-                    onCharacterItemListener,
+                    onClickAction = onClickAction,
                     Modifier.padding(all = Dimens.dimen4),
                 )
             }
@@ -119,7 +120,7 @@ fun StickyHeader(title: String, modifier: Modifier) {
 @Composable
 fun CharacterItemRow(
     characterUI: CharacterUI,
-    onCharacterItemListener: OnCharacterItemListener,
+    onClickAction: (CharactersActionsFromUI) -> Unit,
     modifier: Modifier,
 ) {
     Row(
@@ -128,7 +129,7 @@ fun CharacterItemRow(
             .fillMaxWidth()
             .height(Dimens.dimen96)
             .clip(shape = CustomShape.types.extraLarge)
-            .clickable { onCharacterItemListener.onClick(characterUI) }
+            .clickable { onClickAction(CharactersActionsFromUI.ItemListClick(characterUI)) }
     ) {
         Spacer(modifier = Modifier.padding(horizontal = Dimens.dimen8))
         NetworkImage(
@@ -182,7 +183,7 @@ fun CharacterDetailScreenPreview() {
             birth = "31-07-1980",
         ),
     ).groupBy { it.house }
-    CharactersScreen(CharactersState.Success(CharactersListUI(successData)), {}, {})
+    CharactersScreen(CharactersState.UI.Success(CharactersListUI(successData)), {})
 }
 
 private const val MAX_LINES = 1

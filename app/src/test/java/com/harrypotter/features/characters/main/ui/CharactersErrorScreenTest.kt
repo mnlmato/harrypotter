@@ -24,8 +24,7 @@ class CharactersErrorScreenTest {
         paparazzi.snapshot {
             CustomTheme {
                 CharactersScreen(
-                    charactersState = CharactersState.Error,
-                    {},
+                    charactersState = CharactersState.UI.Error,
                     {},
                 )
             }
