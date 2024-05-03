@@ -6,9 +6,9 @@ import com.harrypotter.features.characters.commons.data.datasource.api.model.Cha
 import com.harrypotter.features.characters.commons.data.datasource.local.CharactersLocalDatasource
 import io.mockk.every
 import io.mockk.mockk
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Assert
+import org.junit.Before
+import org.junit.Test
 
 class CharactersLocalDatasourceIntegrationTest {
 
@@ -22,7 +22,7 @@ class CharactersLocalDatasourceIntegrationTest {
     private val fakeCharactersStringFromJson =
         "[{\"id\":\"9e3f7ce4-b9a7-4244-b709-dae5c1f1d4a8\",\"name\":\"Harry Potter\",\"species\":\"human\",\"gender\":\"male\",\"house\":\"Gryffindor\",\"dateOfBirth\":\"31-07-1980\",\"actor\":\"Daniel Radcliffe\",\"image\":\"https://ik.imagekit.io/hpapi/harry.jpg\"}]"
 
-    @BeforeEach
+    @Before
     fun setup() {
         subject = CharactersLocalDatasource(gson, jsonReader)
     }
@@ -44,7 +44,7 @@ class CharactersLocalDatasourceIntegrationTest {
         val realResult = subject.getCharacters()
 
         val expectedResult = listOf(characterResponse)
-        Assertions.assertEquals(expectedResult, realResult)
+        Assert.assertEquals(expectedResult, realResult)
     }
 
     @Test
@@ -53,6 +53,6 @@ class CharactersLocalDatasourceIntegrationTest {
 
         val realResult = subject.getCharacters()
 
-        Assertions.assertTrue(realResult.isEmpty())
+        Assert.assertTrue(realResult.isEmpty())
     }
 }
