@@ -10,10 +10,3 @@ buildscript {
         classpath(libs.paparazzi)
     }
 }
-
-allprojects {
-    repositories {
-        mavenCentral()
-        google()
-    }
-}

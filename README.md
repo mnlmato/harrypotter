@@ -12,6 +12,7 @@ This is a sample project written in Kotlin using MVVM, Use Case and the Reposito
 - Additionally, the detail screen uses an ID to fetch data from a cache data source
 - The build gradle files were migrated to Kotlin
 - The dependencies were migrated to version catalogs
+- Implements the Gradle Convention Plugins
 - An easy CI was built using GitHub actions to do the build and run unit tests and screenshot tests
 
 
